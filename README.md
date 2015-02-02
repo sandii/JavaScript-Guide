@@ -18,4 +18,6 @@ As I mentioned in the first sentence, this work will be a long journey. It will 
 Finnally, this work is only a personal learning practice, mistakes would be found everywhere in my translation. So happy to hear correction, discussion or suggestion from anybody. If anyone says my work helps a little bit, it will be my greatest pleasure.
 
 
-Sandii Chenchenzhibupt@qq.com2015-02-02
+Sandii Chen
+chenzhibupt@qq.com
+2015-02-02
