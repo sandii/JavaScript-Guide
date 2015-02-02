@@ -2,6 +2,7 @@
 English-Chinese translation of "JavaScript Definitive Guide"
 
 
+
 This is a long-term English-Chinese translation work on the book "JavaScript Definitive Guide".
 
 Majored in English during my college time, and worded as an English editor in a state media during the first 3 years after my graduation, I finnaly choose to transfor my career into coding.
@@ -18,5 +19,7 @@ Finnally, this work is only a personal learning practice, mistakes would be foun
 
 
 Sandii Chen
+
 chenzhibupt@qq.com
+
 2015-02-02
