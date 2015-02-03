@@ -1,0 +1,409 @@
+1.1 Core JavaScript
+
+1.1 JS核心
+
+
+This section is a tour of the JavaScript language, and also a tour of Part I of this book.
+After this introductory chapter, we dive into JavaScript at the lowest level: Chapter 2,
+Lexical Structure, explains things like JavaScript comments, semicolons, and the Unicode character set.  Chapter 3, Types, Values, and Variables, starts to get more interesting: it explains JavaScript variables and the values you can assign to those variables.
+Here’s some sample code to illustrate the highlights of those two chapters:
+
+本书第一章是概述。第二章讲基础语法，介绍JS注释、分号和Unicode字符集。第三章说数据类型、值和变量。以下是关于这些内容的简单例子。
+
+
+// Anything following double slashes is an English-language comment.
+// Read the comments carefully: they explain the JavaScript code.
+// variable is a symbolic name for a value.
+// Variables are declared with the var keyword:
+var x; // Declare a variable named x.
+
+//双斜杠后是单行注释。
+//变量以关键字var声明。
+var x; //声明变量x
+
+
+// Values can be assigned to variables with an = sign
+x = 0; 	// Now the variable x has the value 0
+x 		// => 0: A variable evaluates to its value.
+
+//赋值符号=
+x = 0; 	//变量x被赋值0
+x 		// => 0  现在x的值为0
+
+// JavaScript supports several types of values
+x = 1; 				// Numbers.
+x = 0.01; 			// Just one Number type for integers and reals.
+x = "hello world"; 	// Strings of text in quotation marks.
+x = 'JavaScript'; 	// Single quote marks also delimit strings.
+x = true; 			// Boolean values.
+x = false; 			// The other Boolean value.
+x = null; 			// Null is a special value that means "no value".
+x = undefined; 		// Undefined is like null.
+
+//JS支持以下数据类型
+x = 1; 				// 整数
+x = 0.01; 			// 浮点数
+x = "hello world"; 	// 引号中为字符串
+x = 'JavaScript'; 	// 字符串单引号也可以
+x = true; 			// 布尔值
+x = false; 			// 另一个布尔值
+x = null; 			// 特殊值null表示无值
+x = undefined; 		// undefined类似于null，以后再细说
+
+
+Two other very important types that JavaScript programs can manipulate are objects
+and arrays. These are the subject of Chapter 6, Objects, and Chapter 7, Arrays, but they
+are so important that you’ll see them many times before you reach those chapters.
+
+JavaScript中两个重要的数据类型是对象和数组，分别将于第6章和第7章详细介绍，但在此之前你也得认识他们，因为他们太重要了。
+
+
+// JavaScript's most important data type is the object.
+// An object is a collection of name/value pairs, or a string to value map.
+var book = { 			// Objects are enclosed in curly braces.
+	topic: "JavaScript",// The property "topic" has value "JavaScript".
+	fat: true 			// The property "fat" has value true.
+}; 						// The curly brace marks the end of the object.
+
+// 对象是JS中最最重要的数据类型
+// 对象可以看作键值对的集合，也可以看作是一个图的字符串索引
+// 对象的内容被包在一对花括号里
+var book = { 
+  topic: "JavaScript", 	// 属性topic的值为"JavaScript"
+  fat: true 			// 属性fat的值为true
+}; 
+
+
+// Access the properties of an object with . or []:
+book.topic 					// => "JavaScript"
+book["fat"] 				// => true: another way to access property values.
+book.author = "Flanagan"; 	// Create new properties by assignment.
+book.contents = {}; 		// {} is an empty object with no properties.
+
+//用.或[]来引用对象的属性
+book.topic 					// => "JavaScript"
+book["fat"] 				// => true
+book.author = "Flanagan"; 	// 创建新属性并赋值
+book.contents = {}; 		// 创建新属性contents并赋值为一个空对象
+
+
+// JavaScript also supports arrays (numerically indexed lists) of values:
+var primes = [2, 3, 5, 7]; 	// An array of 4 values, delimited with [ and ].
+primes[0] 					// => 2: the first element (index 0) of the array.
+primes.length 				// => 4: how many elements in the array.
+primes[primes.length-1] 	// => 7: the last element of the array.
+primes[4] = 9; 				// Add a new element by assignment.
+primes[4] = 11; 			// Or alter an existing element by assignment.
+var empty = []; 			// [] is an empty array with no elements.
+empty.length 				// => 0
+
+//JS支持数组
+var primes = [2, 3, 5, 7]; 	// 以[]限定数组
+primes[0] 					// => 2: 该数组的第一个元素，索引值为0
+primes.length 				// => 4: 获取数组中元素的个数
+primes[primes.length-1] 	// => 7: 该数组的最后一个元素
+primes[4] = 9; 				// 为数组增添新元素并赋值
+primes[4] = 11; 			// 为已存在的元素赋值
+var empty = []; 			// 创建一个空数组
+empty.length 				// => 0
+
+
+// Arrays and objects can hold other arrays and objects:
+var points = [ 		// An array with 2 elements.
+	{x:0, y:0}, 	// Each element is an object.
+	{x:1, y:1}
+];
+var data = { 				// An object with 2 properties
+trial1: [[1,2], [3,4]], 	// The value of each property is an array.
+trial2: [[2,3], [4,5]] 		// The elements of the arrays are arrays.
+};
+
+
+// 数组和对象可互相包含
+// 以下是一个有两个元素的数组，每个元素都是一个对象
+var points = [ 
+	{x:0, y:0},
+	{x:1, y:1}
+];
+//以下是一个有两个属性的对象，对个属性对应的值都是一个数组
+//数组中每个元素又分别是数组
+var data = {
+	trial1: [[1,2], [3,4]], 
+	trial2: [[2,3], [4,5]] 
+};
+
+
+The syntax illustrated above for listing array elements within square braces or mapping
+object property names to property values inside curly braces is known as an initializer
+expression, and it is just one of the topics of Chapter 4, Expressions and Operators. An
+expression is a phrase of JavaScript that can be evaluated to produce a value. The use
+of . and [] to refer to the value of an object property or array element is an expression,
+for example. You may have noticed in the code above that when an expression stands
+alone on a line, the comment that follows it begins with an arrow (=>) and the value of
+the expression. This is a convention that you’ll see throughout this book.
+
+表达式是指运算并产生值的语段。
+用[]声明数组或用{}声明对象的用法叫做初始化表达式。第四章，讲表达式和运算符，将会详述。
+
+
+One of the most common ways to form expressions in JavaScript is to use operators
+like these:
+// Operators act on values (the operands) to produce a new value.
+// Arithmetic operators are the most common:
+3 + 2 						// => 5: addition
+3 - 2 						// => 1: subtraction
+3 * 2 						// => 6: multiplication
+3 / 2 						// => 1.5: division
+points[1].x - points[0].x 	// => 1: more complicated operands work, too
+"3" + "2" 					// => "32": + adds numbers, concatenates strings
+
+再举几个例子大家看看运算符怎么用：
+//运算符作用于数值上 用于产生新值
+//最常用的当然是算数运算符 加减乘数
+3 + 2 						// => 5
+3 - 2 						// => 1
+3 * 2 						// => 6
+3 / 2 						// => 1.5
+points[1].x - points[0].x 	// => 1
+"3" + "2" 					// => "32" 加号还用于连接字符串
+
+
+// JavaScript defines some shorthand arithmetic operators
+var count = 0; // Define a variable
+count++; // Increment the variable
+count--; // Decrement the variable
+count += 2; // Add 2: same as count = count + 2;
+count *= 3; // Multiply by 3: same as count = count * 3;
+count // => 6: variable names are expressions, too.
+
+// 还有一些快捷运算符
+var count = 0;
+count++;
+count--;
+count += 2;
+count *= 3;
+count 		// => 6: 单个变量名也可以被看作表达式
+
+
+// Equality and relational operators test whether two values are equal,
+// unequal, less than, greater than, and so on. They evaluate to true or false.
+var x = 2, y = 3; 		// These = signs are assignment, not equality tests
+x == y 					// => false: equality
+x != y 					// => true: inequality
+x < y 					// => true: less-than
+x <= y 					// => true: less-than or equal
+x > y 					// => false: greater-than
+x >= y 					// => false: greater-than or equal
+"two" == "three" 		// => false: the two strings are different
+"two" > "three" 		// => true: "tw" is alphabetically greater than "th"
+false == (x > y) 		// => true: false is equal to false
+// Logical operators combine or invert boolean values
+(x == 2) && (y == 3) 	// => true: both comparisons are true. && is AND
+(x > 3) || (y < 3) 		// => false: neither comparison is true. || is OR
+!(x == y) 				// => true: ! inverts a boolean value
+
+// 关系运算符
+var x = 2, y = 3;
+x == y 				// => false
+x != y 				// => true
+x < y 				// => true
+x <= y 				// => true
+x > y 				// => false
+x >= y 				// => false
+"two" == "three" 	// => false
+"two" > "three" 	// => true: "tw"在字符表上的编号比"th"大
+false == (x > y) 	// => true
+// 结合逻辑运算符
+(x == 2) && (y == 3)// => true
+(x > 3) || (y < 3) 	// => false
+!(x == y) 			// => true
+
+
+If the phrases of JavaScript are expressions, then the full sentences are statements, which
+are the topic of  Chapter 5,  Statements. In the code above, the lines that end with
+semicolons are statements. (In the code below, you’ll see multiline statements that do
+not end with semicolons.) There is actually a lot of overlap between statements and
+expressions. Roughly, an expression is something that computes a value but doesn’t
+do anything: it doesn’t alter the program state in any way. Statements, on the other
+hand, don’t have a value (or don’t have a value that we care about), but they do alter
+the state. You’ve seen variable declarations and assignment statements above.
+
+相对于表达式，整句的代码叫做语句。一般来说，语句以分号结束。语句将会在第5章中详述。其实语句和表达式的区分并没有那么严格。理论上，表达式只计算值，不执行操作，不会改变程序状态。相反的，语句执行操作，改变程序状态。上面的例子中就有声明变量和赋值操作的语句。
+
+
+The other broad category of statement is control structures, such as conditionals and loops. Examples are below, after we cover functions. A functionis a named and parametrized block of JavaScript code that you define once, and can then invoke over and over again. Functions aren’t covered formally until Chapter 8, Functions, but like objects and arrays, you’ll see them many times before you get to that chapter. Here are some simple examples:
+
+语句中比较重要的部分是控制结构，比如条件判断和循环。在讲下面例子之前，我们得先认识一下函数。函数指的是一个含有函数名和参数的代码块，一次定义，多次调用。第8章，我们会详细的讲函数。但是，它和对象、数组一样，太重要了，得先做一些了解。看例子吧：
+
+
+// Functions are parameterized blocks of JavaScript code that we can invoke.
+function plus1(x) { 		// Define a function named "plus1" with parameter "x"
+	return x+1; 			// Return a value one larger than the value passed in
+} 							// Functions are enclosed in curly braces
+plus1(y) 					// => 4: y is 3, so this invocation returns 3+1
+var square = function(x) { 	// Functions are values and can be assigned to vars
+	return x*x; 			// Compute the function's value
+}; 							// Semicolon marks the end of the assignment.
+square(plus1(y)) 			// => 16: invoke two functions in one expression
+
+//函数是有参数的，我们可以多次调用的代码块
+function plus1(x) { 		// 定义函数，函数名为plus1，参数为x
+	return x+1; 			// 返回值为x+1
+} 							// 函数以}结束
+plus1(y) 					// => 4: 传入参数y=3，此次调用返回值4
+var square = function(x) { 	// 函数可以被作为值赋给变量
+	return x*x; 
+}; 							// 分号表明此次赋值结束
+square(plus1(y)) 			// => 16: 在一个语句中调用两个函数
+
+
+//译注：以上这些例子看似基础，但在以后的学习中若接触到“函数式编程”
+//就会发现，通过这类简单的函数的组合，是可以完成一些高级技巧的。
+
+
+When we combine functions with objects, we get methods:
+结合对象，我们能把函数组织得更灵活：
+
+
+// When functions are assigned to the properties of an object, we call
+// them "methods". All JavaScript objects have methods:
+var a = []; 				// Create an empty array
+a.push(1,2,3); 				// The push() method adds elements to an array
+a.reverse(); 				// Another method: reverse the order of elements
+// We can define our own methods, too. The "this" keyword refers to the object
+// on which the method is defined: in this case, the points array from above.
+points.dist = function() { 	// Define a method to compute distance between points
+	var p1 = this[0]; 		// First element of array we're invoked on
+	var p2 = this[1]; 		// Second element of the "this" object
+	var a = p2.x-p1.x; 		// Difference in X coordinates
+	var b = p2.y-p1.y; 		// Difference in Y coordinates
+	return Math.sqrt(a*a + 	// The Pythagorean theorem
+	b*b); 					// Math.sqrt() computes the square root
+};
+points.dist() 				// => 1.414: distance between our 2 points
+
+//当函数被赋给对象的属性时，我们叫它“方法”。所有的JS对象都自带一些方法：
+var a = []; 				//创建一个空数组
+a.push(1,2,3); 				//push()方法为数组增加元素
+a.reverse(); 				//反转数组的排序
+//我们也能定义自己的方法，this关键字指代方法所在的对象
+points.dist = function() { 	// 定义一个计算两点之间距离的方法
+	var p1 = this[0]; 
+	var p2 = this[1];
+	var a = p2.x-p1.x; 
+	var b = p2.y-p1.y;
+	return Math.sqrt(a*a + b*b);
+};
+points.dist();
+
+
+Now, as promised, here are some functions whose bodies demonstrate common JavaScript control structure statements:
+
+我们再看看一些含有JS常用的控制结构的函数：
+
+
+// JavaScript statements include conditionals and loops using the syntax
+// of C, C++, Java, and other languages.
+function abs(x) { 		// A function to compute the absolute value 
+	if (x >= 0) { 		// The if statement...
+		return x; 		// executes this code if the comparison is true.
+	} 					// This is the end of the if clause.
+	else { 				// The optional else clause executes its code if
+		return -x; 		// the comparison is false.
+	} 					// Curly braces optional when 1 statement per clause.
+} 						// Note return statements nested inside if/else.
+function factorial(n) { // A function to compute factorials
+	var product = 1; 	// Start with a product of 1
+	while(n > 1) { 		// Repeat statements in {} while expr in () is true
+		product *= n; 	// Shortcut for product = product * n;
+		n--; 			// Shortcut for n = n - 1
+	} 					// End of loop
+	return product; 	// Return the product
+}
+factorial(4) 				// => 24: 1*4*3*2
+function factorial2(n) { 	// Another version using a different loop
+	var i, product = 1; 	// Start with 1
+	for(i=2; i <= n; i++) 	// Automatically increment i from 2 up to n
+		product *= i; 		// Do this each time. {} not needed for 1-line loops
+	return product; 		// Return the factorial
+}
+factorial2(5) 				// => 120: 1*2*3*4*5
+
+//JS条件语句和循环语句的语法与C、C++、Java等语言类似
+function abs(x) { 		//计算绝对值的函数
+	if (x >= 0) { 		// if语句
+		return x; 
+	} 
+	else { 
+		return -x; 
+	} 
+}
+function factorial(n) { // 计算阶乘的函数
+	var product = 1; 
+	while(n > 1) { 
+		product *= n;
+		n--; 
+	} 
+	return product; 
+}
+factorial(4) 				// => 24: 1*4*3*2
+function factorial2(n) { 	// 还是计算阶乘，这回用的是for循环
+	var i, product = 1; 
+	for(i = 2; i <= n; i++) 
+		product *= i; 
+	return product; 
+}
+factorial2(5) 				// => 120: 1*2*3*4*5
+
+
+JavaScript is an object-oriented language, but it is quite different than most.  Chapter 9,
+Classes and Modules, covers object-oriented programming in JavaScript in detail, with
+lots of examples, and is one of the longest chapters in the book. Here is a very simple
+example that demonstrates how to define a JavaScript class to represent 2D geometric
+points. Objects that are instances of this class have a single method named r() that
+computes the distance of the point from the origin:
+
+JS是一门面向对象的语言，但它和其他面向对象语言相比，差别很大。第9章，类与模块，将详细讲解JS的面向对象编程，是本书最长的一章。下面的例子是一个计算平面几何中两点之间距离的类：
+
+
+// Define a constructor function to initialize a new Point object
+function Point(x,y) { 		// By convention, constructors start with capitals
+	this.x = x; 			// this keyword is the new object being initialized
+	this.y = y; 			// Store function arguments as object properties
+} 							// No return is necessary
+// Use a constructor function with the keyword "new" to create instances
+var p = new Point(1, 1); 	// The geometric point (1,1)
+// Define methods for Point objects by assigning them to the prototype
+// object associated with the constructor function.
+Point.prototype.r = function() { 
+	return Math.sqrt( 		// Return the square root of x² + y²
+		this.x * this.x + 	// This is the Point object on which the method...
+		this.y * this.y 	// ...is invoked.
+	);
+};
+// Now the Point object p (and all future Point objects) inherits the method r()
+p.r() 						// => 1.414...
+
+// 构造函数
+function Point(x,y) { 		// 构造函数首字母一般大写
+	this.x = x; 			// 把参数储存为构造函数对象的属性
+	this.y = y; 
+} 							// 注意！构造函数不能有返回值！
+var p = new Point(1, 1); 	// 以关键字new调用构造函数，进行实例化
+//为构造函数的prototype对象挂载方法
+Point.prototype.r = function() { 
+	return Math.sqrt( this.x * this.x + this.y * this.y);
+};							//此处this指向的是实例化的对象
+//今后，对象p和其他所有Point类的实例化对象将继承r()方法
+p.r() 						// => 1.414...
+//译注：对构造器函数prototype对象的修改可随时进行，
+//不论修改前后实例化出来的对象，其继承情况都会受修改的影响。
+
+
+Chapter 9 is really the climax of Part I, and the chapters that follow wrap up some loose
+ends and bring our exploration of the core language to a close.  Chapter 10,  Pattern
+Matching with Regular Expressions, explains the regular expression grammar and demonstrates how to use these “regexps” for textual pattern matching. Chapter 11, JavaScript Subsets and Extensions, covers subsets and extensions of core JavaScript. Finally,
+before we plunge into client-side JavaScript in web browsers, Chapter 12, Server-Side
+JavaScript, introduces two ways to use JavaScript outside of web browsers.
+
+本书第一部分将在第9章达到高潮，随后的几章再补充一些其他知识。第10章是正则表达式，匹配文本用的。第11章讲JS子集和拓展包。最后，在我们陷入浏览器端JS的汪洋大海之前，第12章，讲服务器端JS，介绍两种不用浏览器使用JS的方法。
