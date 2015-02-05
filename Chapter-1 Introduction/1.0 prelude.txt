@@ -1,24 +1,14 @@
-JavaScript is the programming language of the Web. The overwhelming majority of
-modern websites use JavaScript, and all modern web browsers—on desktops, game
-consoles, tablets, and smart phones—include JavaScript interpreters, making Java-Script the most ubiquitous programming language in history. JavaScript is part of the
-triad of technologies that all Web developers must learn: HTML to specify the content
-of web pages, CSS to specify the presentation of web pages, and JavaScript to specify
-the behavior of web pages. This book will help you master the language.
+JavaScript is the programming language of the Web. The overwhelming majority of modern websites use JavaScript, and all modern web browsers—on desktops, game consoles, tablets, and smart phones—include JavaScript interpreters, making Java-Script the most ubiquitous programming language in history. JavaScript is part of the triad of technologies that all Web developers must learn: HTML to specify the content of web pages, CSS to specify the presentation of web pages, and JavaScript to specifythe behavior of web pages. This book will help you master the language.
 
 JavaScript是一门Web编程语言，是有史以来使用最广泛的语言之一，也是Web前端程序员必备三大技能之一：HTML定义网页内容，CSS负责页面样式，而JavaScript则掌管页面交互行为。
 
 
-If you are already familiar with other programming languages, it may help you to know
-that JavaScript is a high-level, dynamic, untyped interpreted programming language
-that is well-suited to object-oriented and functional programming styles. JavaScript
-derives its syntax from Java, its first-class functions from Scheme, and its prototype-based inheritance from Self. But you do not need to know any of those languages, or
-be familiar with those terms, to use this book and learn JavaScript.
+If you are already familiar with other programming languages, it may help you to know that JavaScript is a high-level, dynamic, untyped interpreted programming language that is well-suited to object-oriented and functional programming styles. JavaScript derives its syntax from Java, its first-class functions from Scheme, and its prototype-based inheritance from Self. But you do not need to know any of those languages, or be familiar with those terms, to use this book and learn JavaScript.
 
 与其他语言相比，JavaScript是一门高级、动态、无类型解释的语言，她以函数式编程的风格实现了面向对象。JavaScript的语法源于Java，函数风格源于Scheme，其prototype式的继承源于Self。就算不会以上提到的这些语言也无妨，不影响我们学习JavaScript。
 
 
-The name “JavaScript” is actually somewhat misleading. Except for a superficial syn-tactic resemblance, JavaScript is completely different from the Java programming lan-guage. And JavaScript has long since outgrown its scripting-language roots to become
-a robust and efficient general-purpose language. The latest version of the language (see the sidebar) defines new features for serious large-scale software development.
+The name “JavaScript” is actually somewhat misleading. Except for a superficial syn-tactic resemblance, JavaScript is completely different from the Java programming lan-guage. And JavaScript has long since outgrown its scripting-language roots to become a robust and efficient general-purpose language. The latest version of the language (see the sidebar) defines new features for serious large-scale software development.
 
 JavaScript的名字容易让人误以为她和Java有所联系，其实除了语法上相似，他们基本没有关联。作为一门长期独立发展的脚本语言，JavaScript目前成长得相当健壮、功能十分强大。
 
@@ -34,16 +24,12 @@ JavaScript was created at Netscape in the early days of the Web, and technically
 在Web技术萌芽的早些年，JavaScript由Netscape开发出来。“Java-Script”其实是Sun（现在是Oracle）的一个注册商标。因为商标问题，当初Netscape把她提交给ECMA的时候官方名称叫“ECMAScript”，而Microsoft的版本叫““JScript”。但现实中，大家一般叫它JavaScript。
 
 
-For the last decade, all web browsers have implemented version 3 of the ECMAScript
-standard and there has really been no need to think about version numbers: the lan-guage standard was stable and browser implementations of the language were, for the
-most part, interoperable. Recently, an important new version of the language has been
-defined as ECMAScript version 5 and, at the time of this writing, browsers are beginning to implement it. This book covers all the new features of ECMAScript 5 as well as all the long-standing features of ECMAScript 3. You’ll sometimes see these language ver-sions abbreviated as ES3 and ES5, just as you’ll sometimes see the name JavaScript abbreviated as JavaScript.
+For the last decade, all web browsers have implemented version 3 of the ECMAScript standard and there has really been no need to think about version numbers: the lan-guage standard was stable and browser implementations of the language were, for the most part, interoperable. Recently, an important new version of the language has been defined as ECMAScript version 5 and, at the time of this writing, browsers are beginning to implement it. This book covers all the new features of ECMAScript 5 as well as all the long-standing features of ECMAScript 3. You’ll sometimes see these language ver-sions abbreviated as ES3 and ES5, just as you’ll sometimes see the name JavaScript abbreviated as JavaScript.
 
 在过去十年，JavaScript语言标准很稳定，所有的浏览器都用ECMAScript第三版标准，基本不需要考虑JavaScript的版本问题。但是，新发布的第五版标准改动较大。由此产生的区别，本书将加以区分，分别标注为ES3和ES5。
 
 
-When we’re speaking of the language itself, the only version numbers that are relevant
-are ECMAScript versions 3 or 5. (Version 4 of ECMAScript was under development for years, but proved to be too ambitious and was never released.) 
+When we’re speaking of the language itself, the only version numbers that are relevant are ECMAScript versions 3 or 5. (Version 4 of ECMAScript was under development for years, but proved to be too ambitious and was never released.) 
 
 有人可能会问，为什么是第三版和第五版，第四版呢？其实，第四版已经开发了好多年，可惜最后被证明摊子铺的太大，没能收住，因此至今也未发布。
 
@@ -79,17 +65,12 @@ Part III is the reference section for the core API. You can read about the JavaS
 第三部分是JavaScript核心API的参考手册。比如，要看JavaScript处理数组有哪些接口，就可以在此部分中查“Array”。
 
 
-Part IVis the reference section for client-side JavaScript. You might look up “Canvas” in this part of the book to read about the graphics API defined by the HTML5
-<canvas> element, for example.
+Part IVis the reference section for client-side JavaScript. You might look up “Canvas” in this part of the book to read about the graphics API defined by the HTML5 <canvas> element, for example.
 
 第四部分是客户端JavaScript的参考手册。比如，想看HTML5的canvas标签如何画图，请在此部分中查“Canvas”。
 
 
-This book covers low-level fundamentals first, and then builds on those to more
-advanced and higher-level abstractions. The chapters are intended to be read more or
-less in order. But learning a new programming language is never a linear process, and
-describing a language is not linear either: each language feature is related to other features and this book is full of cross-references—sometimes backward and sometimes
-forward to material you have not yet read. 
+This book covers low-level fundamentals first, and then builds on those to more advanced and higher-level abstractions. The chapters are intended to be read more or less in order. But learning a new programming language is never a linear process, and describing a language is not linear either: each language feature is related to other features and this book is full of cross-references—sometimes backward and sometimes forward to material you have not yet read. 
 
 整体上，本书从易到难，从浅到深。但是语言的功能总是相互关联的，学习一门语言并非一个纯线性过程，描述一门语言同样如此。因此本书有些部分会有些跳跃，在讲解部分内容的时候可能会牵涉到后面某些尚未讲解的知识，也可能需要回顾从前的某些内容。
 

@@ -3,9 +3,7 @@
 1.1 JS核心
 
 
-This section is a tour of the JavaScript language, and also a tour of Part I of this book.
-After this introductory chapter, we dive into JavaScript at the lowest level: Chapter 2,
-Lexical Structure, explains things like JavaScript comments, semicolons, and the Unicode character set.  Chapter 3, Types, Values, and Variables, starts to get more interesting: it explains JavaScript variables and the values you can assign to those variables.
+This section is a tour of the JavaScript language, and also a tour of Part I of this book. After this introductory chapter, we dive into JavaScript at the lowest level: Chapter 2, Lexical Structure, explains things like JavaScript comments, semicolons, and the Unicode character set.  Chapter 3, Types, Values, and Variables, starts to get more interesting: it explains JavaScript variables and the values you can assign to those variables.
 Here’s some sample code to illustrate the highlights of those two chapters:
 
 本书第一章是概述。第二章讲基础语法，介绍JS注释、分号和Unicode字符集。第三章说数据类型、值和变量。以下是关于这些内容的简单例子。
@@ -51,9 +49,7 @@ x = null; 			// 特殊值null表示无值
 x = undefined; 		// undefined类似于null，以后再细说
 
 
-Two other very important types that JavaScript programs can manipulate are objects
-and arrays. These are the subject of Chapter 6, Objects, and Chapter 7, Arrays, but they
-are so important that you’ll see them many times before you reach those chapters.
+Two other very important types that JavaScript programs can manipulate are objects and arrays. These are the subject of Chapter 6, Objects, and Chapter 7, Arrays, but they are so important that you’ll see them many times before you reach those chapters.
 
 JavaScript中两个重要的数据类型是对象和数组，分别将于第6章和第7章详细介绍，但在此之前你也得认识他们，因为他们太重要了。
 
@@ -133,21 +129,13 @@ var data = {
 };
 
 
-The syntax illustrated above for listing array elements within square braces or mapping
-object property names to property values inside curly braces is known as an initializer
-expression, and it is just one of the topics of Chapter 4, Expressions and Operators. An
-expression is a phrase of JavaScript that can be evaluated to produce a value. The use
-of . and [] to refer to the value of an object property or array element is an expression,
-for example. You may have noticed in the code above that when an expression stands
-alone on a line, the comment that follows it begins with an arrow (=>) and the value of
-the expression. This is a convention that you’ll see throughout this book.
+The syntax illustrated above for listing array elements within square braces or mapping object property names to property values inside curly braces is known as an initializer expression, and it is just one of the topics of Chapter 4, Expressions and Operators. An expression is a phrase of JavaScript that can be evaluated to produce a value. The use of . and [] to refer to the value of an object property or array element is an expression, for example. You may have noticed in the code above that when an expression stands alone on a line, the comment that follows it begins with an arrow (=>) and the value of the expression. This is a convention that you’ll see throughout this book.
 
 表达式是指运算并产生值的语段。
 用[]声明数组或用{}声明对象的用法叫做初始化表达式。第四章，讲表达式和运算符，将会详述。
 
 
-One of the most common ways to form expressions in JavaScript is to use operators
-like these:
+One of the most common ways to form expressions in JavaScript is to use operators like these:
 // Operators act on values (the operands) to produce a new value.
 // Arithmetic operators are the most common:
 3 + 2 						// => 5: addition
@@ -219,14 +207,7 @@ false == (x > y) 	// => true
 !(x == y) 			// => true
 
 
-If the phrases of JavaScript are expressions, then the full sentences are statements, which
-are the topic of  Chapter 5,  Statements. In the code above, the lines that end with
-semicolons are statements. (In the code below, you’ll see multiline statements that do
-not end with semicolons.) There is actually a lot of overlap between statements and
-expressions. Roughly, an expression is something that computes a value but doesn’t
-do anything: it doesn’t alter the program state in any way. Statements, on the other
-hand, don’t have a value (or don’t have a value that we care about), but they do alter
-the state. You’ve seen variable declarations and assignment statements above.
+If the phrases of JavaScript are expressions, then the full sentences are statements, which are the topic of  Chapter 5,  Statements. In the code above, the lines that end with semicolons are statements. (In the code below, you’ll see multiline statements that do not end with semicolons.) There is actually a lot of overlap between statements and expressions. Roughly, an expression is something that computes a value but doesn’t do anything: it doesn’t alter the program state in any way. Statements, on the other hand, don’t have a value (or don’t have a value that we care about), but they do alter the state. You’ve seen variable declarations and assignment statements above.
 
 相对于表达式，整句的代码叫做语句。一般来说，语句以分号结束。语句将会在第5章中详述。其实语句和表达式的区分并没有那么严格。理论上，表达式只计算值，不执行操作，不会改变程序状态。相反的，语句执行操作，改变程序状态。上面的例子中就有声明变量和赋值操作的语句。
 
@@ -356,12 +337,7 @@ function factorial2(n) { 	// 还是计算阶乘，这回用的是for循环
 factorial2(5) 				// => 120: 1*2*3*4*5
 
 
-JavaScript is an object-oriented language, but it is quite different than most.  Chapter 9,
-Classes and Modules, covers object-oriented programming in JavaScript in detail, with
-lots of examples, and is one of the longest chapters in the book. Here is a very simple
-example that demonstrates how to define a JavaScript class to represent 2D geometric
-points. Objects that are instances of this class have a single method named r() that
-computes the distance of the point from the origin:
+JavaScript is an object-oriented language, but it is quite different than most.  Chapter 9, Classes and Modules, covers object-oriented programming in JavaScript in detail, with lots of examples, and is one of the longest chapters in the book. Here is a very simple example that demonstrates how to define a JavaScript class to represent 2D geometric points. Objects that are instances of this class have a single method named r() that computes the distance of the point from the origin:
 
 JS是一门面向对象的语言，但它和其他面向对象语言相比，差别很大。第9章，类与模块，将详细讲解JS的面向对象编程，是本书最长的一章。下面的例子是一个计算平面几何中两点之间距离的类：
 
@@ -400,10 +376,6 @@ p.r() 						// => 1.414...
 //不论修改前后实例化出来的对象，其继承情况都会受修改的影响。
 
 
-Chapter 9 is really the climax of Part I, and the chapters that follow wrap up some loose
-ends and bring our exploration of the core language to a close.  Chapter 10,  Pattern
-Matching with Regular Expressions, explains the regular expression grammar and demonstrates how to use these “regexps” for textual pattern matching. Chapter 11, JavaScript Subsets and Extensions, covers subsets and extensions of core JavaScript. Finally,
-before we plunge into client-side JavaScript in web browsers, Chapter 12, Server-Side
-JavaScript, introduces two ways to use JavaScript outside of web browsers.
+Chapter 9 is really the climax of Part I, and the chapters that follow wrap up some loose ends and bring our exploration of the core language to a close.  Chapter 10,  Pattern Matching with Regular Expressions, explains the regular expression grammar and demonstrates how to use these “regexps” for textual pattern matching. Chapter 11, JavaScript Subsets and Extensions, covers subsets and extensions of core JavaScript. Finally, before we plunge into client-side JavaScript in web browsers, Chapter 12, Server-Side JavaScript, introduces two ways to use JavaScript outside of web browsers.
 
 本书第一部分将在第9章达到高潮，随后的几章再补充一些其他知识。第10章是正则表达式，匹配文本用的。第11章讲JS子集和拓展包。最后，在我们陷入浏览器端JS的汪洋大海之前，第12章，讲服务器端JS，介绍两种不用浏览器使用JS的方法。

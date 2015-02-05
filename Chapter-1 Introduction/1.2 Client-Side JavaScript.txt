@@ -45,8 +45,7 @@ Chapter 13, JavaScript in Web Browsers, is the first chapter of Part II and it e
 -------------------------------------------
 
 
-Chapter 14, The Window Object, explains techniques for scripting the web browser and
-covers some important global functions of client-side JavaScript. For example:
+Chapter 14, The Window Object, explains techniques for scripting the web browser and covers some important global functions of client-side JavaScript. For example:
 
 第14章，window对象，讲解在浏览器中设置、运行脚本的技巧和客户端JS的一些全局函数。例子：
 
@@ -80,8 +79,7 @@ Note that the client-side example code shown in this section comes in longer sni
 注意到了吗？这些例子比我们讲JS语言核心时举的那些要长多了。别把他们输入到FireBug或者其他开发者工具里去运行。正确的做法是把他们粘到HTML文件里去，直接用浏览器去读这个HTML。
 
 
-Chapter 15,  Scripting Documents, gets down to the real business of client-side JavaScript, scripting HTML document content. It shows you how to select particular HTML elements from within a document, how to set HTML attributes of those elements, how to alter the content of those elements, and how to add new elements to the document.
-This function demonstrates a number of these basic document searching and modification techniques:
+Chapter 15, Scripting Documents, gets down to the real business of client-side JavaScript, scripting HTML document content. It shows you how to select particular HTML elements from within a document, how to set HTML attributes of those elements, how to alter the content of those elements, and how to add new elements to the document. This function demonstrates a number of these basic document searching and modification techniques:
 
 第15章，脚本文件，介绍浏览器端JS的真实业务，看看它怎么完成选中页面元素、修改他们的属性、为页面添加新元素、弹窗提示等各种操作。例子：
 
@@ -226,9 +224,7 @@ Chapters  15,  16, and  17 explain how you can use JavaScript to script the cont
 第15、16、17章分别讲解了如何用JS控制网页内容（HTML）、样式（CSS）和行为（事件绑定）。鉴于本部分JS的原生API极其复杂，加上各种浏览器不同的兼容性一起来捣乱，所以写浏览器端JS的程序员为了不被逼疯，一般都要使用JS的类库或框架。现在最流行的框架是jQuery，可以兼容IE6，第19章就是介绍它的。
 
 
-jQuery code is easy to identify because it makes frequent use of a function named
-$(). Here is what the debug() function used previously looks like when rewritten to use
-jQuery:
+jQuery code is easy to identify because it makes frequent use of a function named $(). Here is what the debug() function used previously looks like when rewritten to use jQuery:
 function debug(msg) {
 	var log = $("#debuglog");
 	if (log.length == 0) { 
@@ -249,7 +245,6 @@ function debug(msg) {
 }
 
 
-The four chapters of Part II described so far have all really been about web pages. Four more chapters shift gears to focus on web applications. These chapters are not about using web browsers to display documents with scriptable content, presentation, and behavior. Instead, they’re about using web browsers as application platforms, and they describe the APIs that modern browsers provide to support sophisticated client-side
-web apps. Chapter 18, Scripted HTTP, explains how to make scripted HTTP requests with JavaScript a kind of networking API. Chapter 20, Client-Side Storage, describes mechanisms for storing data—and even entire applications—on the client side for use in future browsing sessions. Chapter 21, Scripted Media and Graphics, covers a client-side API for drawing arbitrary graphics in an HTML <canvas> tag. And, finally, Chapter 22,  HTML5 APIs, covers an assortment of new web app APIs specified by or affiliated with HTML5. Networking, storage, graphics: these are OS-type services being provided by the web browser, defining a new cross-platform application environment. If you are targeting browsers that support these new APIs, it is an exciting time to be a client-side JavaScript programmer. There are no code samples from these final four chapters here, but the extended example below uses some of these new APIs.
+The four chapters of Part II described so far have all really been about web pages. Four more chapters shift gears to focus on web applications. These chapters are not about using web browsers to display documents with scriptable content, presentation, and behavior. Instead, they’re about using web browsers as application platforms, and they describe the APIs that modern browsers provide to support sophisticated client-side web apps. Chapter 18, Scripted HTTP, explains how to make scripted HTTP requests with JavaScript a kind of networking API. Chapter 20, Client-Side Storage, describes mechanisms for storing data—and even entire applications—on the client side for use in future browsing sessions. Chapter 21, Scripted Media and Graphics, covers a client-side API for drawing arbitrary graphics in an HTML <canvas> tag. And, finally, Chapter 22,  HTML5 APIs, covers an assortment of new web app APIs specified by or affiliated with HTML5. Networking, storage, graphics: these are OS-type services being provided by the web browser, defining a new cross-platform application environment. If you are targeting browsers that support these new APIs, it is an exciting time to be a client-side JavaScript programmer. There are no code samples from these final four chapters here, but the extended example below uses some of these new APIs.
 
 第14-17章内容都是针对网页的，而从18到21章我们转而介绍Web App。第18章讲如何用JS发送HTTP请求。第20章讲如何利用浏览器存储数据，乃至储存整个应用。第21章讲如何在HTML的<canvas>标签绘制图表。最后一章，第22章，简单的讲一下HTML5。有了网络、存储、图表，就可以模拟出跨平台能力极强的环境。最后的几章内容可以看看以下的大例子，它展示了如何应用这些技术。

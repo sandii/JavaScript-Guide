@@ -1,0 +1,8 @@
+﻿CHAPTER 2 Lexical Structure
+
+第二章 词法结构
+
+
+The lexical structure of a programming language is the set of elementary rules that specifies how you write programs in that language. It is the lowest-level syntax of a language; it specifies such things as what variable names look like, the delimiter char-acters for comments, and how one program statement is separated from the next. This short chapter documents the lexical structure of JavaScript.
+
+词法结构是最基础的语法问题，说直白一点，就是变量名该怎么命名，注释该怎么写，句与句之间怎么分隔等等。本章就是探讨这些问题的。
