@@ -1,0 +1,47 @@
+2.1 Character Set
+JavaScript programs are written using the Unicode character set. Unicode is a superset of ASCII and Latin-1 and supports virtually every written language currently used on the planet. ECMAScript 3 requires JavaScript implementations to support Unicode version 2.1 or later, and ECMAScript 5 requires implementations to support Unicode 3 or later. See the sidebar in §3.2for more about Unicode and JavaScript.
+
+2.1 字符集
+JS使用Unicode字符集。Unicode字符集非常大，理论上，所有地球上的字符它都支持。ES3要求Unicode2.1或以上，ES5要求Unicode3或以上.关于Unicode和JS，在§3.2还会详述。
+
+
+2.1.1 Case Sensitivity
+JavaScript is a case-sensitive language. This means that language keywords, variables, function names, and other identifiersmust always be typed with a consistent capitalization of letters. The while keyword, for example, must be typed “while,” not “While” or “WHILE.” Similarly,  online,  Online,  OnLine, and  ONLINE are four distinct variable names.
+Note, however, that HTML is not case-sensitive (although XHTML is). Because of its close association with client-side JavaScript, this difference can be confusing. Many client-side JavaScript objects and properties have the same names as the HTML tags and attributes they represent. While these tags and attribute names can be typed in any case in HTML, in JavaScript they typically must be all lowercase. For example, the HTML onclickevent handler attribute is sometimes specified as  onClick in HTML, but it must be specified as onclick in JavaScript code (or in XHTML documents).
+
+2.1.1 大小写敏感
+JS大小写敏感。
+例如，while关键字不能写成While。
+而online、Online、OnLine和ONLINE是完全不同的四个变量名。
+需要注意的是，HTML大小写不敏感（而XHTML敏感）。为了防止混淆，对于需要在HTML和JS同时使用的名称，JS中一般统一小写，比如HTML中的onClick，JS中就写为onclick。
+
+
+2.1.2 Whitespace, Line Breaks, and Format Control Characters
+JavaScript ignores spaces that appear between tokens in programs. For the most part, JavaScript also ignores line breaks (but see §2.5 for an exception). Because you can use spaces and newlines freely in your programs, you can format and indent your programs in a neat and consistent way that makes the code easy to read and understand.
+In addition to the regular space character (\u0020), JavaScript also recognizes the following characters as whitespace: tab (\u0009), vertical tab (\u000B), form feed (\u000C), nonbreaking space (\u00A0), byte order mark (\uFEFF), and any character in Unicode category Zs. JavaScript recognizes the following characters as line terminators: line feed (\u000A), carriage return (\u000D), line separator (\u2028), and paragraph sep-arator (\u2029). A carriage return, line feed sequence is treated as a single line terminator.
+Unicode format control characters (category Cf), such as RIGHT-TO-LEFT MARK (\u200F) and LEFT-TO-RIGHT MARK (\u200E), control the visual presentation of the text they occur in. They are important for the proper display of some non-English languages and are allowed in JavaScript comments, string literals, and regular expression literals, but not in the identifiers (e.g., variable names) of a JavaScript program.
+As a special case, ZERO WIDTH JOINER (\u200D) and ZERO WIDTH NON-JOINER (\u200C) are allowed in identifiers, but not as the first character. As noted above, the byte order mark format control character (\uFEFF) is treated as a space character.
+
+2.1.2 空格、空行和格式控制字符
+JS忽略所有空格，大多数情况下忽略空行，唯一不忽略空行的例外见§2.5。因此，JS的代码可以随意排版和缩进成易于理解和维护的格式。
+非英语单词可以用于字符串或注释，但是为了代码可移植和易维护，别用他们来命名变量和其他标识符。虽然用了也不会报错。
+
+
+2.1.3 Unicode Escape Sequences
+Some computer hardware and software can not display or input the full set of Unicode characters. To support programmers using this older technology, JavaScript defines special sequences of six ASCII characters to represent any 16-bit Unicode code point. These Unicode escapes begin with the characters \u and are followed by exactly four hexadecimal digits (using uppercase or lowercase letters A–F). Unicode escapes may appear in JavaScript string literals, regular expression literals, and in identifiers (but not in language keywords). The Unicode escape for the character é, for example, is \u00E9, and the following two JavaScript strings are identical: "café" === "caf\u00e9" // => true
+Unicode escapes may also appear in comments, but since comments are ignored, they are treated as ASCII characters in that context and not interpreted as Unicode.
+
+2.1.3 Unicode转义序列
+某些过时的软件或系统无法识别Unicode中某些字符。为了解决这个问题，JS定义了一套ASCII能识别的六位转义码，格式为\u加上4位十六进制数。这套转义码可以用于字符串、正则表达式和系统标识符，但是不能用于JS保留关键字。比如é的转义码为\u00e9，以下两个字符串完全等价：
+"café" === "caf\u00e9" // => true
+注释中也可以使用转义码，但是由于并不会真的执行转义。
+
+
+2.1.4 Normalization
+Unicode allows more than one way of encoding the same character. The string “é”, for example, can be encoded as the single Unicode character \u00E9 or as a regular ASCII e followed by the acute accent combining mark \u0301. These two encodings may look exactly the same when displayed by a text editor, but they have different binary en-codings and are considered different by the computer. The Unicode standard defines
+the preferred encoding for all characters and specifies a normalization procedure to convert text to a canonical form suitable for comparisons. JavaScript assumes that the source code it is interpreting has already been normalized and makes no attempt to normalize identifiers, strings, or regular expressions itself.
+
+2.1.4 标准化
+同一个字符Unicode可以有多种编码方式。例如é可以被编码为\u00E9或e\u0301，两者看起来一模一样，但其二进制编码却完全不同。JS识别转义码时是假设其已通过一套标准化的编码方式转义而来，本身并不再做标准化处理。
+
+
