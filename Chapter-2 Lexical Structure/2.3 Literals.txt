@@ -1,0 +1,29 @@
+2.3 Literals
+A literal is a data value that appears directly in a program. The following are all literals:
+12 				// The number twelve
+1.2 			// The number one point two
+"hello world" 	// A string of text
+'Hi' 			// Another string
+true 			// A Boolean value
+false 			// The other Boolean value
+/javascript/gi 	// A "regular expression" literal (for pattern matching)
+null 			// Absence of an object
+
+Complete details on numeric and string literals appear in Chapter 3. Regular expression literals are covered in  Chapter 10. More complex expressions (see §4.2) can serve as array and object literals. For example:
+{ x:1, y:2 } 	// An object initializer
+[1,2,3,4,5] 	// An array initializer
+
+2.3 值
+JavaScript中的各种值：
+12 				// 数字
+1.2 			// 浮点数
+"hello world" 	// 字符串
+'Hi' 			// 又一个字符串
+true 			// 布尔值
+false 			// 另一个布尔值
+/javascript/gi 	// 一个正则表达式
+null 			// 无值
+
+数字和字符串的详情将会在第3章中讲解，正则表达式是在第10章。更复杂一些的是数组和对象：
+{ x:1, y:2 } 	//对象 
+[1,2,3,4,5] 	//数组
