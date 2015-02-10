@@ -1,0 +1,85 @@
+CHAPTER 3 Types, Values, and Variables
+
+第3章 数据类型、值、变量
+
+
+Computer programs work by manipulating values, such as the number 3.14 or the text “Hello World.” The kinds of values that can be represented and manipulated in a programming language are known as types, and one of the most fundamental characteristics of a programming language is the set of types it supports. 
+
+程序的本质是对值的操作，值的不同种类就叫做数据类型。而编程语言的最基础的特性之一就是支持各种数据类型。
+
+
+When a program needs to retain a value for future use, it assigns the value to (or “stores” the value in) a variable. A variable defines a symbolic name for a value and allows the value to be referred to by name. The way that variables work is another fundamental characteristic of any programming language. 
+
+想复用一个值，一般都要先把它赋给一个变量，再做操作。直白点说就是给这个值起个名字，以后就能通过这个名字来随时调用它。变量的用法是编程语言的另一个基础特性。
+
+
+This chapter explains types, values, and variables in JavaScript. These introductory paragraphs provide an overview, and you may find it helpful to refer to §1.1 while you read them. The sections that follow cover these topics in depth.
+
+本章介绍JavaScript中的数据类型、值和变量。其实我们在§1.1中就概括地说过，本章将进行详解。
+
+
+JavaScript types can be divided into two categories: primitive types and object types. JavaScript’s primitive types include numbers, strings of text (known as strings), and Boolean truth values (known as booleans). A significant portion of this chapter is dedicated to a detailed explanation of the numeric (§3.1) and string (§3.2) types in JavaScript. Booleans are covered in §3.3.
+
+JavaScript中的数据类型可分为两大类，基础类和对象类。基础类包括数字、字符串和布尔值，本章的§3.1、§3.2和§3.3将分别介绍。
+
+
+The special JavaScript values null and undefined are primitive values, but they are not numbers, strings, or booleans. Each value is typically considered to be the sole member of its own special type. §3.4 has more about null and undefined.
+
+基础类中还有两个特殊的成员：null和undefined。这两种类型分别只有它们本身这一种值。§3.4将详述。
+
+
+Any JavaScript value that is not a number, a string, a boolean, or null or undefined is an object. An object (that is, a member of the type object) is a collection of properties where each property has a name and a value (either a primitive value, such as a number or string, or an object). One very special object, the global object, is covered in  §3.5, but more general and more detailed coverage of objects is in Chapter 6.
+
+JavaScript中最重要的数据类型是对象类，包括对象、数组和函数。对象是一个无序的键值对集合，相对地，数组是有序的键值对集合。还有一个比较特殊的对象叫全局对象，我们将会在§3.5讲。更详细第讲解对象就要到第6章了。
+
+
+An ordinary JavaScript object is an unordered collection of named values. The language also defines a special kind of object, known as an array, that represents an ordered collection of numbered values. The JavaScript language includes special syntax for working with arrays, and arrays have some special behavior that distinguishes them from ordinary objects. Arrays are the subject of Chapter 7.
+
+普通对象是无序键值对集合。此外JavaScript还定义一种特殊的对象，数组，用于存储一些列有序的键值对。数组有着许多特殊的语法和特征。第7章我们会详细介绍数组。
+
+
+JavaScript defines another special kind of object, known as a function. A function is an object that has executable code associated with it. A function may be invoked to run that executable code and return a computed value. Like arrays, functions behave differently from other kinds of objects, and JavaScript defines a special language syntax for working with them. The most important thing about functions in JavaScript is that
+they are true values and that JavaScript programs can treat them like regular objects.
+Functions are covered in Chapter 8.
+
+JavaScript中，函数也是一种特殊的对象。与其它语言相比，JavaScript最特别最精髓的一点就是可以把函数当成普通对象一样进行传递和操作，可以用于实现许多复杂的技巧。第8章我们将详述函数。
+
+
+Functions that are written to be used (with the new operator) to initialize a newly created object are known as constructors. Each constructor defines a class of objects—the set of objects initialized by that constructor. Classes can be thought of as subtypes of the object type. In addition to the Array and Function classes, core JavaScript defines three other useful classes. The Date class defines objects that represent dates. The RegExp class defines objects that represent regular expressions (a powerful pattern-matching tool described in  Chapter 10). And the Error class defines objects that represent syntax and runtime errors that can occur in a JavaScript program. You can define your own classes of objects by defining appropriate constructor functions. This is explained in Chapter 9.
+
+用new运算符符进行实例化的函数称为构造器。每个构造器都定义了一个类。因此，类也可以被看作对象中的一种特殊类型。核心JavaScript自带有5个类：Function、Array、Date、RegExp和Error。你可以通过构造函数来定义自己的类，我们将在第9章中详述。
+
+
+The JavaScript interpreter performs automatic garbage collection for memory management. This means that a program can create objects as needed, and the programmer never needs to worry about destruction or deallocation of those objects. When an object is no longer reachable—when a program no longer has any way to refer to it—the interpreter knows it can never be used again and automatically reclaims the memory it was occupying.
+
+JavaScript自带自动垃圾收集功能。那些与外界失去联系的对象，再也不会被调用，JavaScript会自动识别并清理，然后自动重新分配存储空间。因此我们在编码的时候可以按需要随时创建对象，而不需要考虑何时去销毁它们并重新分配内存。
+
+
+JavaScript is an object-oriented language. Loosely, this means that rather than having globally defined functions to operate on values of various types, the types themselves define  methods for working with values. To sort the elements of an array a, for example, we don’t pass a to a sort() function. Instead, we invoke the sort() method of a: a.sort(); // The object-oriented version of sort(a).
+
+由于JavaScript面向对象的特性，各数据类型都有自带一系列方法，用于各种常用操作，而不用调用全局函数。比如，对数组a排序只需这样：a.sort(); 而不用：sort(a)。
+
+
+Method definition is covered in Chapter 9. Technically, it is only JavaScript objects that have methods. But numbers, strings, and boolean values behave as if they had methods (§3.6 explains how this works). In JavaScript, null and undefined are the only values that methods cannot be invoked on.
+
+理论上，只有对象才有方法，但实际上数字、字符串甚至连布尔值都自带方法（§3.6会解释其原理）。而null和undefined是两种不带有任何方法的数据类型。
+
+
+JavaScript’s types can be divided into primitive types and object types. And they can be divided into types with methods and types without. They can also be categorized as mutable and immutable types. A value of a mutable type can change. Objects and arrays are mutable: a JavaScript program can change the values of object properties and array elements. Numbers, booleans, null, and undefined are immutable—it doesn’t even make sense to talk about changing the value of a number, for example. Strings can be thought of as arrays of characters, and you might expect them to be mutable. In JavaScript, however, strings are immutable: you can access the text at any index of a string, but JavaScript provides no way to alter the text of an existing string. The differences between mutable and immutable values are explored further in §3.7.
+
+刚才说过，JavaScript的数据类型可以被分为基础类型和对象类型，也可以被分为自带方法类型和无自带方法类型，还可以被分为可变类型和不可变类型。可变类型是指其数据的值可以改变，比如对象、数组。数字、布尔值、null、undefined都是不可变类型的。比较特殊的是字符串，因为它可以被认为是由字符组成的数组，因此，也容易被误认为是可变的。但JavaScript中，字符串的值不可变。你可以访问字符串里的任意字符，但JavaScript没有提供任何办法去修改它。也就是说，每次对字符串都修改实际上都是创建了一个新的字符串。§3.7将详解可变值和不可变值。
+
+
+JavaScript converts values liberally from one type to another. If a program expects a string, for example, and you give it a number, it will automatically convert the number to a string for you. If you use a nonboolean value where a boolean is expected, JavaScript will convert accordingly. The rules for value conversion are explained in §3.8. JavaScript’s liberal value conversion rules affect its definition of equality, and the == equality operator performs type conversions as described in §3.8.1.
+
+JavaScript会自动执行数据类型转换，具体规则详见§3.8。JavaScript的类型转换特性不可避免会影响等价的定义。§3.8.1将讲解==运算符是如何进行类型转换的。
+
+
+JavaScript variables are untyped: you can assign a value of any type to a variable, and you can later assign a value of a different type to the same variable. Variables are declared with the var keyword. 
+
+声明JavaScript变量时，我们不需要为其规定数据类型。变量可被赋予任何类型的数据，并且随时改变其数据类型。变量统一以关键字var声明。
+
+
+JavaScript uses lexical scoping. Variables declared outside of a function are global variables and are visible everywhere in a JavaScript program. Variables declared inside a function have function scope and are visible only to code that appears inside that function. Variable declaration and scope are covered in §3.9 and §3.10.
+
+JavaScript对变量的作用域规定很严格。在函数之外声明的变量会成为全局变量，在整个程序中均可见。而函数之内声明的变量只在其函数内可见。关于变量声明和作用域的内容我们会在§3.9和§3.10详述。
