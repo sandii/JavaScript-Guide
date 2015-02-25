@@ -1,0 +1,239 @@
+3.2 Text 
+A string is an immutable ordered sequence of 16-bit values, each of which typically represents a Unicode character—strings are JavaScript’s type for representing text. The length of a string is the number of 16-bit values it contains. JavaScript’s strings (and its arrays) use zero-based indexing: the first 16-bit value is at position 0, the second at position 1 and so on. The empty stringis the string of length 0. JavaScript does not have a special type that represents a single element of a string. To represent a single 16-bit value, simply use a string that has a length of 1.
+
+3.2 文字
+JavaSript的每个字符都由一个16位的值表示，一个或多个字符的序列称为字符串，用于表示文字。JavaSript字符串和数组一样，索引从零开始。JS中没有单个字符的数据类型，只有长度为1的字符串。
+
+
+
+**********************************************
+
+Characters, Codepoints, and JavaScript Strings
+
+JavaScript uses the UTF-16 encoding of the Unicode character set, and JavaScript strings are sequences of unsigned 16-bit values. The most commonly used Unicode characters (those from the “basic multilingual plane”) have codepoints that fit in 16 bits and can be represented by a single element of a string. Unicode characters whose codepoints do not fit in 16 bits are encoded following the rules of UTF-16 as a sequence (known as a “surrogate pair”) of two 16-bit values. This means that a JavaScript string of length 2 (two 16-bit values) might represent only a single Unicode character:
+
+var p = "π"; 			// π is 1 character with 16-bit codepoint 0x03c0
+var e = "e"(italic); 	// e(italic) is 1 character with 17-bit codepoint 0x1d452
+p.length 				// => 1: p consists of 1 16-bit element
+e.length 				// => 2: UTF-16 encoding of e is 2 16-bit values: "\ud835\udc52"
+
+The various string-manipulation methods defined by JavaScript operate on 16-bit values, not on characters. They do not treat surrogate pairs specially, perform no normalization of the string, and do not even ensure that a string is well-formed UTF-16.
+
+字符、字符码和JS字符串
+常用字符用16位字符码就够，但一些不常用的字符需要用两个16位来表示，因此长度会被计为2。
+var p = "π"; 		// π一个16位搞定 0x03c0
+var e = "e"(斜体); 	// 斜体e是17位的 0x1d452，因此得用双16位
+p.length 			// => 1
+e.length 			// => 2
+JavaSript字符串自带的方法只能用于操作字符串中的各个16位值，而不能操作单个字符串，对双16位字符也没有作特殊处理。这些方法甚至并不判断所操作的字符串是否是完好的UTF-16编码。因此在操作的字符串中有特殊字符时要特别注意。
+
+**************************************************
+
+
+3.2.1 String Literals
+To include a string literally in a JavaScript program, simply enclose the characters of the string within a matched pair of single or double quotes ('or"). Double-quote characters may be contained within strings delimited by single-quote characters, and single-quote characters may be contained within strings delimited by double quotes. Here are examples of string literals:
+"" // The empty string: it has zero characters
+'testing'
+"3.14"
+'name="myform"'
+"Wouldn't you prefer O'Reilly's book?"
+"This string\nhas two lines"
+"π is the ratio of a circle's circumference to its diameter"
+
+3.2.1 字符
+JavaScript字符串用单引号对或双引号对来定义，两者可以互相包含：
+"" // 空字符串
+'testing'
+"3.14"
+'name="myform"'
+"Wouldn't you prefer O'Reilly's book?"
+"This string\nhas two lines"
+"π is the ratio of a circle's circumference to its diameter"
+
+
+In ECMAScript 3, string literals must be written on a single line. In ECMAScript 5, however, you can break a string literal across multiple lines by ending each line but the last with a backslash (\). Neither the backslash nor the line terminator that follow it are part of the string literal. If you need to include a newline character in a string literal, use the character sequence \n(documented below):
+"two\nlines" 	// A string representing 2 lines written on one line
+"one\ 			// A one-line string written on 3 lines. ECMAScript 5 only.
+long\
+line"
+Note that when you use single quotes to delimit your strings, you must be careful with English contractions and possessives, such as can’t and O’Reilly’s. Since the apostrophe is the same as the single-quote character, you must use the backslash character (\) to “escape” any apostrophes that appear in single-quoted strings (escapes are explained in the next section).
+
+ES3规定，一个字符串必须在一行内完成。ES5中放宽了这一规定，但需要在每行末尾加上用于转义的反斜杠\。换行符和\都不会被计为字符串的一部分，如果想记录换行符，可以用\n：
+"two\nlines"
+"one\
+long\
+line"
+用单引号定义字符串时，要小心其中的撇号，他们俩长得一模一样。如果在单引号中使用撇号，需要在撇号前加上反斜杠\转义。
+
+
+In client-side JavaScript programming, JavaScript code may contain strings of HTML code, and HTML code may contain strings of JavaScript code. Like JavaScript, HTML uses either single or double quotes to delimit its strings. Thus, when combining JavaScript and HTML, it is a good idea to use one style of quotes for JavaScript and the other style for HTML. In the following example, the string “Thank you” is single-quoted within a JavaScript expression, which is then double-quoted within an HTML event-handler attribute:
+<button onclick="alert('Thank you')">Click Me</button>
+
+因为客户端JavaScript常处理HTML，而两者中字符串都是用单双引号包含。为避免冲突，一般规定HTML用一种引号，JavaScript用另一种。
+下例中，HTML事件处理器属性的值使用双引号包含，而其中的JavaScript表达式里的字符串则用单引号。
+<button onclick="alert('Thank you')">Click Me</button>
+
+
+3.2.2 Escape Sequences in String Literals
+
+The backslash character (\) has a special purpose in JavaScript strings. Combined with the character that follows it, it represents a character that is not otherwise representable within the string. For example, \n is an escape sequencethat represents a newline character.
+
+Another example, mentioned above, is the \'escape, which represents the single quote (or apostrophe) character. This escape sequence is useful when you need to include an apostrophe in a string literal that is contained within single quotes. You can see why these are called escape sequences: the backslash allows you to escape from the usual interpretation of the single-quote character. Instead of using it to mark the end of the string, you use it as an apostrophe:
+'You\'re right, it can\'t be a quote'
+
+
+3.2.2 字符串中的转义
+反斜杠在JavaScript字符串中有着特殊的作用，其后面跟随的字符并不会被作为字符串的一部分进行解释。
+例如，\n表示换行，\'避免了撇号被认为是字符串的结束：
+'You\'re right, it can\'t be a quote'
+
+
+Table 3-1 lists the JavaScript escape sequences and the characters they represent. Two escape sequences are generic and can be used to represent any character by specifying its Latin-1 or Unicode character code as a hexadecimal number. For example, the sequence \xA9 represents the copyright symbol, which has the Latin-1 encoding given by the hexadecimal number A9. Similarly, the \u escape represents an arbitrary Unicode character specified by four hexadecimal digits; \u03c0 represents the character π, for example.
+
+********************************************
+
+Table 3-1. JavaScript escape sequences
+Sequence Character represented
+\0 The NUL character (\u0000)
+\b Backspace (\u0008)
+\t Horizontal tab (\u0009)
+\n Newline (\u000A)
+\v Vertical tab (\u000B)
+\f Form feed (\u000C)
+\r Carriage return (\u000D)
+\" Double quote (\u0022)
+\' Apostrophe or single quote (\u0027)
+\\ Backslash (\u005C)
+\x XX The Latin-1 character specified by the two hexadecimal digits XX
+\u XXXX The Unicode character specified by the four hexadecimal digits XXXX
+
+************************************************
+
+If the \ character precedes any character other than those shown in Table 3-1, the backslash is simply ignored (although future versions of the language may, of course, define new escape sequences). For example, \# is the same as #. Finally, as noted above, ECMAScript 5 allows a backslash before a line break to break a string literal across multiple lines.
+
+
+表3-1列出了JavaScript转义序列
+其中\x和\u是通用的，可以通过十六进制数来表示任意的Latin-1或Unicode字符。
+比如\xA9表示版权符号，因为版权符号的Latin-1十六进制编码是A9。
+类似的，\u03c0用于表示π。
+
+********************************************
+
+表3-1. JS转义
+\0 NUL (\u0000)
+\b 退格 (\u0008)
+\t tab (\u0009)
+\n 换行 (\u000A)
+\v 垂直tab (\u000B)
+\f 翻页 (\u000C)
+\r 回车 (\u000D)
+\" 双引 (\u0022)
+\' 单引或撇号 (\u0027)
+\\ 反斜杠 (\u005C)
+\x XX \+两位代码表示Latin-1字符集
+\u XXXX \+四位代码表示Unicode字符集
+
+************************************************
+
+除了以上列出的这些，\出现在字符串中会直接被忽略，比如\#就等同于#。当然未来的版本也许会有更多的转义用法。
+
+
+
+3.2.3 Working with Strings
+
+One of the built-in features of JavaScript is the ability to concatenate strings. If you use the + operator with numbers, it adds them. But if you use this operator on strings, it joins them by appending the second to the first. For example:
+msg = "Hello, " + "world"; // Produces the string "Hello, world"
+greeting = "Welcome to my blog," + " " + name;
+
+3.2.3 字符串处理
++可以用于连接字符串：
+msg = "Hello, " + "world"; 
+greeting = "Welcome to my blog," + " " + name;
+
+
+To determine the length of a string—the number of 16-bit values it contains—use the length property of the string. Determine the length of a string slike this:
+s.length
+
+直接求字符串长度：
+s.length
+
+
+In addition to this length property, there are a number of methods you can invoke on strings (as always, see the reference section for complete details):
+var s = "hello, world" 	// Start with some text.
+s.charAt(0) 			// => "h": the first character.
+s.charAt(s.length-1) 	// => "d": the last character.
+s.substring(1,4) 		// => "ell": the 2nd, 3rd and 4th characters.
+s.slice(1,4) 			// => "ell": same thing
+s.slice(-3) 			// => "rld": last 3 characters
+s.indexOf("l") 			// => 2: position of first letter l.
+s.lastIndexOf("l") 		// => 10: position of last letter l.
+s.indexOf("l", 3) 		// => 3: position of first "l" at or after 3
+s.split(", ") 			// => ["hello", "world"] split into substrings
+s.replace("h", "H") 	// => "Hello, world": replaces all instances
+s.toUpperCase() 		// => "HELLO, WORLD"
+
+除了长度属性，字符串还自带很多方法：
+var s = "hello, world" 
+s.charAt(0) 			// => "h" 取特定位置的字符
+s.charAt(s.length-1) 	// => "d"
+s.substring(1,4) 		// => "ell" 截取字符串
+s.slice(1,4) 			// => "ell"
+s.slice(-3) 			// => "rld"
+s.indexOf("l") 			// => 2 字符位置
+s.lastIndexOf("l") 		// => 10
+s.indexOf("l", 3) 		// => 3 从第3个字符开始查找
+s.split(", ") 			// => ["hello", "world"] 分割字符串
+s.replace("h", "H") 	// => "Hello, world" 替换
+s.toUpperCase() 		// => "HELLO, WORLD"
+
+
+Remember that strings are immutable in JavaScript. Methods like replace() and toUpperCase() return new strings: they do not modify the string on which they are invoked.
+
+要记住，字符串是不可修改的数据类型，像replace()和toUpperCase()这样的方法都是创建一个新的字符串返回，而不是修改原本的字符串。
+
+
+In ECMAScript 5, strings can be treated like read-only arrays, and you can access individual characters (16-bit values) from a string using square brackets instead of the charAt() method:
+s = "hello, world";
+s[0] // => "h"
+s[s.length-1] // => "d"
+Mozilla-based web browsers such as Firefox have allowed strings to be indexed in this way for a long time. Most modern browsers (with the notable exception of IE) followed Mozilla’s lead even before this feature was standardized in ECMAScript 5.
+
+ES5标准已允许通过[索引]的方式访问字符串中的单个字符。在此标准确立之前，已火狐为代表的一大批浏览器就已支持此方法了，但IE却始终不行。
+
+
+3.2.4 Pattern Matching
+
+JavaScript defines a RegExp() constructor for creating objects that represent textual patterns. These patterns are described with regular expressions, and JavaScript adopts Perl’s syntax for regular expressions. Both strings and RegExp objects have methods for performing pattern matching and search-and-replace operations using regular expressions.
+
+RegExps are not one of the fundamental types of JavaScript. Like Dates, they are simply a specialized kind of object, with a useful API. The regular expression grammar is complex and the API is nontrivial. They are documented in detail in Chapter 10. Because RegExps are powerful and commonly used for text processing, however, this section provides a brief overview.
+
+3.2.4 模式匹配
+JavaScript自带RegExp类，用正则表达式进行字符串的对比、查询和替换等操作，其语法源于Perl。
+正则表达式语法比较复杂，我们在第十章中将详细介绍，这里先略讲一些。
+
+
+Although RegExps are not one of the fundamental data types in the language, they do have a literal syntax and can be encoded directly into JavaScript programs. Text between a pair of slashes constitutes a regular expression literal. The second slash in the pair can also be followed by one or more letters, which modify the meaning of the pattern. For example:
+/^HTML/ 			// Match the letters H T M L at the start of a string
+/[1-9][0-9]*/ 		// Match a non-zero digit, followed by any # of digits
+/\bjavascript\b/i 	// Match "javascript" as a word, case-insensitive
+RegExp objects define a number of useful methods, and strings also have methods that accept RegExp arguments. For example:
+var text = "testing: 1, 2, 3"; 	// Sample text
+var pattern = /\d+/g 			// Matches all instances of one or more digits
+pattern.test(text) 				// => true: a match exists
+text.search(pattern) 			// => 9: position of first match
+text.match(pattern) 			// => ["1", "2", "3"]: array of all matches
+text.replace(pattern, "#"); 	// => "testing: #, #, #"
+text.split(/\D+/); 				// => ["","1","2","3"]: split on non-digits
+
+正则表达式以一对斜杠/.../进行包含，后面可以跟字母，表示模式：
+/^HTML/ 				//查找字符串开头的字母H、T、M、L
+/[1-9][0-9]*/ 			// 查找一个两位数字，第一位非零
+/\bjavascript\b/i 		// 查找单词"javascript"，大小写敏感
+RegExp类自带了一系列方法，而字符串也有方法可接收RegExp参数：
+var text = "testing: 1, 2, 3"; 
+var pattern = /\d+/g 		// 查找所有数字
+pattern.test(text) 			// => true 存在
+text.search(pattern) 		// => 9 位置
+text.match(pattern) 		// => ["1", "2", "3"] 以数组返回查找结果
+text.replace(pattern, "#"); // => "testing: #, #, #" 替换
+text.split(/\D+/); 			// => ["","1","2","3"]: 以非数字划分字符串
