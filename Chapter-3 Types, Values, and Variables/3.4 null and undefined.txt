@@ -3,44 +3,22 @@
 3.4 null和undefined
 
 
-null is a language keyword that evaluates to a special value that is usually used to
-indicate the absence of a value. Using the typeof operator on null returns the string
-“object”, indicating that null can be thought of as a special object value that indicates
-“no object”. In practice, however, null is typically regarded as the sole member of its
-own type, and it can be used to indicate “no value” for numbers and strings as well as
-objects. Most programming languages have an equivalent to JavaScript’s  null: you may
-be familiar with it as null or nil.
+null is a language keyword that evaluates to a special value that is usually used to indicate the absence of a value. Using the typeof operator on null returns the string “object”, indicating that null can be thought of as a special object value that indicates “no object”. In practice, however, null is typically regarded as the sole member of its own type, and it can be used to indicate “no value” for numbers and strings as well as objects. Most programming languages have an equivalent to JavaScript’s  null: you may be familiar with it as null or nil.
 
 null一般用于表示无值。用typeof运算符操作null返回object，说明null可被认为是一个特殊的对象，用于表示“无对象”。然而实际上，null被认为是一种独立的数据类型，只有null一个值。其他语言也都有这么一个值，null或nil。
 
 
-JavaScript also has a second value that indicates absence of value. The undefined value
-represents a deeper kind of absence. It is the value of variables that have not been
-initialized and the value you get when you query the value of an object property or array
-element that does not exist. The undefined value is also returned by functions that have
-no return value, and the value of function parameters for which no argument is supplied. undefined is a predefined global variable (not a language keyword like null) that
-is initialized to the undefined value. In ECMAScript 3, undefined is a read/write variable, and it can be set to any value. This error is corrected in ECMAScript 5 and
-undefinedis read-only in that version of the language. If you apply the typeof operator
-to the undefined value, it returns “undefined”, indicating that this value is the sole
-member of a special type.
+JavaScript also has a second value that indicates absence of value. The undefined value represents a deeper kind of absence. It is the value of variables that have not been initialized and the value you get when you query the value of an object property or array element that does not exist. The undefined value is also returned by functions that have no return value, and the value of function parameters for which no argument is supplied. undefined is a predefined global variable (not a language keyword like null) that is initialized to the undefined value. In ECMAScript 3, undefined is a read/write variable, and it can be set to any value. This error is corrected in ECMAScript 5 and undefinedis read-only in that version of the language. If you apply the typeof operator to the undefined value, it returns “undefined”, indicating that this value is the sole member of a special type.
 
 undefined也表示无值，但是程度更深，产生的原因是变量未被初始化或元素更本不存在。无返回值的函数的返回值是undefined。null是系统关键字，而undefined是一个全局变量，ES3为可读可写，ES5修正为只读。用typeof运算符操作undefined返回undefined，表明它确实是一种数据类型，且只有本身这一个值。
 
 
-Despite these differences, null and undefined both indicate an absence of value and
-can often be used interchangeably. The equality operator  == considers them to be equal.
-(Use the strict equality operator === to distinguish them. Both are falsy values—they
-behave like false when a boolean value is required. Neither null nor undefined have
-any properties or methods. In fact, using  .or [] to access a property or method of these
-values causes a TypeError.
+Despite these differences, null and undefined both indicate an absence of value and can often be used interchangeably. The equality operator  == considers them to be equal. (Use the strict equality operator === to distinguish them. Both are falsy values—they behave like false when a boolean value is required. Neither null nor undefined have any properties or methods. In fact, using  .or [] to access a property or method of these values causes a TypeError.
 
 null和undefined用==比较将返回true，得用===才能返回false。两者作为对象都没有任何的属性和方法，用.或[]试图访问其属性将导致一个TypeError。
 
 
-You might consider undefined to represent a system-level, unexpected, or error-like
-absence of value and null to represent program-level, normal, or expected absence of
-value. If you need to assign one of these values to a variable or property or pass one of
-these values to a function, null is almost always the right choice.
+You might consider undefined to represent a system-level, unexpected, or error-like absence of value and null to represent program-level, normal, or expected absence of value. If you need to assign one of these values to a variable or property or pass one of these values to a function, null is almost always the right choice.
 
 undefined是系统级别的错误，往往是事先未预料的。而null是程序级和可控的。如果要用一个值来表示一个变量无值的状态，用null比较好一些。
 

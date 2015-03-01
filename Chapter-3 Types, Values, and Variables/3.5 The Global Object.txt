@@ -3,13 +3,8 @@
 3.5 全局对象
 
 
-The sections above have explained JavaScript’s primitive types and values. Object
-types—objects, arrays, and functions—are covered in chapters of their own later in this
-book. But there is one very important object value that we must cover now. The global
-object is a regular JavaScript object that serves a very important purpose: the properties
-of this object are the globally defined symbols that are available to a JavaScript program.
-When the JavaScript interpreter starts (or whenever a web browser loads a new page),
-it creates a new global object and gives it an initial set of properties that define:
+The sections above have explained JavaScript’s primitive types and values. Object types—objects, arrays, and functions—are covered in chapters of their own later in this book. But there is one very important object value that we must cover now. The global object is a regular JavaScript object that serves a very important purpose: the properties of this object are the globally defined symbols that are available to a JavaScript program.
+When the JavaScript interpreter starts (or whenever a web browser loads a new page), it creates a new global object and gives it an initial set of properties that define:
 • global properties like undefined, Infinity, and NaN
 • global functions like isNaN(), parseInt()(§3.8.2), and eval()(§4.12).
 • constructor functions like  Date(),  RegExp(),  String(),  Object(), and  Array()
@@ -25,30 +20,18 @@ it creates a new global object and gives it an initial set of properties that de
 • 全局对象：Math、JSON
 
 
-The initial properties of the global object are not reserved words, but they deserve to
-be treated as if they are. §2.4.1 lists each of these properties. This chapter has already
-described some of these global properties. Most of the others will be covered elsewhere
-in this book. And you can look them all up by name in the core JavaScript reference
-section, or look up the global object itself under the name “Global”. For client-side
-JavaScript, the Window object defines other globals that you can look up in the client-side reference section.
+The initial properties of the global object are not reserved words, but they deserve to be treated as if they are. §2.4.1 lists each of these properties. This chapter has already described some of these global properties. Most of the others will be covered elsewhere in this book. And you can look them all up by name in the core JavaScript reference section, or look up the global object itself under the name “Global”. For client-side JavaScript, the Window object defines other globals that you can look up in the client-side reference section.
 
 这些全局属性不属于保留字，但值得拥有保留字一般的地位，别轻易去占用他们。
 §2.4.1罗列出了所有的全局属性。
 在客户端JavaScipt中，全局对象叫做Window，它下面还挂载了很多其他全局属性，随解释器（浏览器）的不同而改变。
 
 
-In top-level code—JavaScript code that is not part of a function—you can use the
-JavaScript keyword this to refer to the global object:
+In top-level code—JavaScript code that is not part of a function—you can use the JavaScript keyword this to refer to the global object:
 var global = this; // Define a global variable to refer to the global object
-In client-side JavaScript, the Window object serves as the global object for all JavaScript
-code contained in the browser window it represents. This global Window object has a
-self-referential window property that can be used instead of this to refer to the global
-object. The Window object defines the core global properties, but it also defines quite
-a few other globals that are specific to web browsers and client-side JavaScript.
+In client-side JavaScript, the Window object serves as the global object for all JavaScript code contained in the browser window it represents. This global Window object has a self-referential window property that can be used instead of this to refer to the global object. The Window object defines the core global properties, but it also defines quite a few other globals that are specific to web browsers and client-side JavaScript.
 When first created, the global object defines all of JavaScript’s predefined global values.
-But this special object also holds program-defined globals as well. If your code declares
-a global variable, that variable is a property of the global object. §3.10.2 explains this
-in more detail.
+But this special object also holds program-defined globals as well. If your code declares a global variable, that variable is a property of the global object. §3.10.2 explains this in more detail.
 
 在最外层代码中（未包裹在函数里），我们可以使用this来指向这个全局对象：
 var global = this; // 声明一个全局变量指向全局对象
