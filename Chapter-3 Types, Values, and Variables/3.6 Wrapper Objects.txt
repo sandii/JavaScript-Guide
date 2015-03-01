@@ -1,0 +1,90 @@
+3.6 Wrapper Objects
+
+3.6 包裹对象
+
+
+JavaScript objects are composite values: they are a collection of properties or named
+values. We refer to the value of a property using the . notation. When the value of a
+property is a function, we call it a method. To invoke the method m of an object o, we
+write o.m().
+
+JavaScript对象是一系列键值对的集合。
+这些键值对被称为属性。
+若对应的值为函数，我们称它为方法；
+我们可以用.来访问属性或调用方法。
+对象o的方法m我们可以这么调用：o.m();
+
+
+We’ve also seen that strings have properties and methods:
+var s = "hello world!";                             // A string
+var word = s.substring(s.indexOf(" ")+1, s.length); // Use string properties
+Strings are not objects, though, so why do they have properties? Whenever you try to
+refer to a property of a string s, JavaScript converts the string value to an object as if by
+calling new String(s). This object inherits (see §6.2.2) string methods and is used to
+resolve the property reference. Once the property has been resolved, the newly created
+object is discarded. (Implementations are not required to actually create and discard
+this transient object: they must behave as if they do, however.)
+
+但是字符串不是对象，但也有属性和方法，这是为什么呢：
+var s = "hello world!";
+var word = s.substring(s.indexOf(" ")+1, s.length); 
+原理是这样的：当我们试图访问字符串s的属性时，JavaScript会自动把s转换成为一个对象。
+效果就像执行了new String(s)，因此该对象将继承String类的所有方法（见 §6.2.2）。
+当此次访问结束，这个临时对象会被销毁。（真实过程并非这么复杂，但可以这么理解。）
+
+
+Numbers and booleans have methods for the same reason that strings do: a temporary
+object is created using the Number() or Boolean() constructor, and the method is resolved using that temporary object. There are not wrapper objects for the null and
+undefined values: any attempt to access a property of one of these values causes a
+TypeError.
+
+数字和布尔值也有一样的能力。
+但null和undefined不行，试图访问它们的属性会导致TypeError。
+
+
+Consider the following code and think about what happens when it is executed:
+var s = "test";         // Start with a string value.
+s.len = 4;              // Set a property on it.
+var t = s.len;          // Now query the property.
+When you run this code, the value of t is undefined. The second line of code creates a
+temporary String object, sets its len property to 4, and then discards that object. The
+third line creates a new String object from the original (unmodified) string value and
+then tries to read the len property. This property does not exist, and the expression
+evaluates to undefined. This code demonstrates that strings, numbers, and boolean
+values behave like objects when you try to read the value of a property (or method)
+from them. But if you attempt to set the value of a property, that attempt is silently
+ignored: the change is made on a temporary object and does not persist.
+
+猜猜运行以下代码的情况：
+var s = "test";
+s.len = 4;
+var t = s.len;
+答案是t为undefined。
+第二行代码中，我们试图访问s的属性，于是s创建了一个临时对象，并为这个对象创建len属性，赋值4，然后立刻销毁这个临时对象。
+第三行再次试图访问s的属性，s再次创建另一个临时对象，然而物是人非，这个临时对象是没有len属性的，因此返回undefined。
+这个例子说明了数字、字符串、布尔值的属性和方法可以访问，但因为临时对象不能持久，所以对它们进行修改或赋值是没有意义的。
+
+
+The temporary objects created when you access a property of a string, number, or boolean are known as wrapper objects, and it may occasionally be necessary to distinguish a string value from a String object or a number or boolean value from a Number or Boolean object. Usually, however, wrapper objects can be considered an implementation detail and you don’t have to think about them. You just need to know that string, number, and boolean values differ from objects in that their properties are read-only and that you can’t define new properties on them.
+
+这种临时对象被称为包裹对象，它的这一特性可以用来区别数字、字符串、布尔值和它们分别所对应的对象。其他我们只需要知道包裹对象的属性和方法是只读的，我们不能修改赋值，也不能创建新的属性和方法。
+
+
+Note that it is possible (but almost never necessary or useful) to explicitly create wrapper objects, by invoking the String(), Number(), or Boolean() constructors:
+var s = "test", n = 1, b = true;  // A string, number, and boolean value.
+var S = new String(s);            // A String object
+var N = new Number(n);            // A Number object
+var B = new Boolean(b);           // A Boolean object
+JavaScript converts wrapper objects into the wrapped primitive value as necessary, so
+the objects S, N, and B above usually, but not always, behave just like the values s, n,
+and b. The == equality operator treats a value and its wrapper object as equal, but you
+can distinguish them with the === strict equality operator. The typeof operator will also
+show you the difference between a primitive value and its wrapper object.
+
+
+我们也可以通过调用String()、 Number()、Boolean()手动创建包裹对象，虽然这并没有什么实际用处：
+var s = "test", n = 1, b = true;
+var S = new String(s);
+var N = new Number(n);
+var B = new Boolean(b);
+S、N、B在使用的过程中和s、n、b没有明显区别，用==比较也返回true，但是用typeof或===就能看出区别了。
