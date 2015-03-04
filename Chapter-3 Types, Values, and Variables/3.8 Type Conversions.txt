@@ -3,10 +3,7 @@
 3.8 类型转换
 
 
-JavaScript is very flexible about the types of values it requires. We’ve seen this for
-booleans: when JavaScript expects a boolean value, you may supply a value of any type,
-and JavaScript will convert it as needed. Some values (“truthy” values) convert to
-true and others (“falsy” values) convert to false. The same is true for other types: if
+JavaScript is very flexible about the types of values it requires. We’ve seen this for booleans: when JavaScript expects a boolean value, you may supply a value of any type, and JavaScript will convert it as needed. Some values (“truthy” values) convert to true and others (“falsy” values) convert to false. The same is true for other types: if
 JavaScript wants a string, it will convert whatever value you give it to a string. If Java-Script wants a number, it will try to convert the value you give it to a number (or to NaN if it cannot perform a meaningful conversion). Some examples:
 10 + " objects" 	// => "10 objects". Number 10 converts to a string
 "7" * "4" 			// => 28: both strings convert to numbers
@@ -20,9 +17,7 @@ var n = 1 - "x"; 	// => NaN 字符串x实在无法转换为数字
 n + " objects" 		// => "NaN objects" NaN被转换为字符串
 
 
-Table 3-2 summarizes how values convert from one type to another in JavaScript. Bold
-entries in the table highlight conversions that you may find surprising. Empty cells
-indicate that no conversion is necessary and none is performed.
+Table 3-2 summarizes how values convert from one type to another in JavaScript. Bold entries in the table highlight conversions that you may find surprising. Empty cells indicate that no conversion is necessary and none is performed.
 
 *******************************
 
@@ -90,10 +85,6 @@ The primitive-to-primitive conversions shown in the table are relatively straigh
 基本类型之间的转换都比较直接。各类型转换为布尔值我们在§3.3中已经详解过了，各类型转换为字符串也比较好说。各类型转换为数字稍微有点绕，字符串开头和末尾的空格可以忽略，但是如果首尾是非空格也非数字的字符转换时就会产生NaN。还有些很有意思的情况：true转换为数字时为1，flase和""转换为0。
 
 
-Primitive-to-object conversions are straightforward: primitive values convert to their
-wrapper object (§3.6) as if by calling the String(),  Number(), or Boolean() constructor.
-The exceptions are null and undefined: any attempt to use these values where an object
-is expected raises a TypeError exception rather than performing a conversion.
-Object-to-primitive conversion is somewhat more complicated, and it is the subject of §3.8.3.
+Primitive-to-object conversions are straightforward: primitive values convert to their wrapper object (§3.6) as if by calling the String(),  Number(), or Boolean() constructor. The exceptions are null and undefined: any attempt to use these values where an object is expected raises a TypeError exception rather than performing a conversion. Object-to-primitive conversion is somewhat more complicated, and it is the subject of §3.8.3.
 
 基础类型转换为对象我们在§3.6中也讲过了，就是调用类构造器String()、Number()或Boolean()。null和undefined转换为对象会产生TypeError。而对象转换为基础类型就复杂了，§3.8.3再讲。
