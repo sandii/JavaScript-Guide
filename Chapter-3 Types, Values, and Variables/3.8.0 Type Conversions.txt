@@ -1,0 +1,90 @@
+3.8 Type Conversions
+
+3.8 类型转换
+
+
+JavaScript is very flexible about the types of values it requires. We’ve seen this for booleans: when JavaScript expects a boolean value, you may supply a value of any type, and JavaScript will convert it as needed. Some values (“truthy” values) convert to true and others (“falsy” values) convert to false. The same is true for other types: if
+JavaScript wants a string, it will convert whatever value you give it to a string. If Java-Script wants a number, it will try to convert the value you give it to a number (or to NaN if it cannot perform a meaningful conversion). Some examples:
+10 + " objects" 	// => "10 objects". Number 10 converts to a string
+"7" * "4" 			// => 28: both strings convert to numbers
+var n = 1 - "x"; 	// => NaN: string "x" can't convert to a number
+n + " objects" 		// => "NaN objects": NaN converts to string "NaN"
+
+JS对数据类型的要求很宽松，能随时灵活转换数据类型：
+10 + " objects" 	// => "10 objects". 数字10被转换成为字符串
+"7" * "4" 			// => 28 两个字符串都被转换为数字
+var n = 1 - "x"; 	// => NaN 字符串x实在无法转换为数字
+n + " objects" 		// => "NaN objects" NaN被转换为字符串
+
+
+Table 3-2 summarizes how values convert from one type to another in JavaScript. Bold entries in the table highlight conversions that you may find surprising. Empty cells indicate that no conversion is necessary and none is performed.
+
+*******************************
+
+Table 3-2. JavaScript type conversions
+Value Converted to:
+
+Value 		String 		Number 		Boolean 	Object
+
+undefined  "undefined" 	NaN 		false 		TypeError
+null 		"null" 		0 			false 		TypeError
+true 		"true" 		1 						new Boolean(true)
+false 		"false" 	0 						new Boolean(false)
+""			 			0 			false 		new String("")
+"1.2"					1.2 		true 		new String("1.2")
+"one"					NaN 		true 		new String("one")
+0 			"0" 					false 		new Number(0)
+-0 			"0" 					false 		new Number(-0)
+NaN 		"NaN" 					false 		new Number(NaN)
+Infinity 	"Infinity" 				true 		new Number(Infinity)
+-Infinity 	"-Infinity" 			true 		new Number(-Infinity)
+1 			"1" 					true 		new Number(1)
+{}			§3.8.3 		§3.8.3 		true
+[]			"" 			0 			true
+[9]			"9" 		9 			true
+['a']		'a' 		NaN 		true
+function(){} §3.8.3		NaN 		true
+
+**********************************
+
+
+
+下表详述转换规则：
+
+*******************************
+
+表3-2 JavaScript类型转换
+
+值 			字符串 		数字 		布尔值  	对象
+
+undefined  "undefined" 	NaN 		false 		TypeError
+null 		"null" 		0 			false 		TypeError
+true 		"true" 		1 						new Boolean(true)
+false 		"false" 	0 						new Boolean(false)
+""			 			0 			false 		new String("")
+"1.2"					1.2 		true 		new String("1.2")
+"one"					NaN 		true 		new String("one")
+0 			"0" 					false 		new Number(0)
+-0 			"0" 					false 		new Number(-0)
+NaN 		"NaN" 					false 		new Number(NaN)
+Infinity 	"Infinity" 				true 		new Number(Infinity)
+-Infinity 	"-Infinity" 			true 		new Number(-Infinity)
+1 			"1" 					true 		new Number(1)
+{}			§3.8.3 		§3.8.3 		true
+[]			"" 			0 			true
+[9]			"9" 		9 			true
+['a']		'a' 		NaN 		true
+function(){} §3.8.3		NaN 		true
+
+**********************************
+
+
+The primitive-to-primitive conversions shown in the table are relatively straightforward. Conversion to boolean was already discussed in §3.3. Conversion to strings is well-defined for all primitive values. Conversion to numbers is just a little trickier. Strings that can be parsed as numbers convert to those numbers. Leading and trailing spaces are allowed, but any leading or trailing nonspace characters that are not part of a numeric literal cause the string-to-number conversion to produce NaN. Some numeric conversions may seem surprising: true converts to 1, and  false and the empty string "" convert to 0.
+
+
+基本类型之间的转换都比较直接。各类型转换为布尔值我们在§3.3中已经详解过了，各类型转换为字符串也比较好说。各类型转换为数字稍微有点绕，字符串开头和末尾的空格可以忽略，但是如果首尾是非空格也非数字的字符转换时就会产生NaN。还有些很有意思的情况：true转换为数字时为1，flase和""转换为0。
+
+
+Primitive-to-object conversions are straightforward: primitive values convert to their wrapper object (§3.6) as if by calling the String(),  Number(), or Boolean() constructor. The exceptions are null and undefined: any attempt to use these values where an object is expected raises a TypeError exception rather than performing a conversion. Object-to-primitive conversion is somewhat more complicated, and it is the subject of §3.8.3.
+
+基础类型转换为对象我们在§3.6中也讲过了，就是调用类构造器String()、Number()或Boolean()。null和undefined转换为对象会产生TypeError。而对象转换为基础类型就复杂了，§3.8.3再讲。
