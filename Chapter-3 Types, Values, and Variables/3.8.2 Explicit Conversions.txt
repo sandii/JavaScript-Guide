@@ -1,0 +1,125 @@
+3.8.2 Explicit Conversions
+
+3.8.2 手动转换
+
+
+Although JavaScript performs many type conversions automatically, you may sometimes need to perform an explicit conversion, or you may prefer to make the conversions explicit to keep your code clearer.
+The simplest way to perform an explicit type conversion is to use the Boolean(), Number(), String(), or Object() functions. We’ve already seen these functions as constructors for wrapper objects (in §3.6). When invoked without the new operator, however, they work as conversion functions and perform the conversions summarized in Table 3-2:
+Number("3") 	// => 3
+String(false) 	// => "false" Or use false.toString()
+Boolean([]) 	// => true
+Object(3) 		// => new Number(3)
+
+如果需要手动转换数据类型，可以调用Boolean()、Number()、String()、Object()这几个全局函数。
+也许你对发现这几个函数眼熟，因为它们同时也是之前说的用来创建包裹对象的全局类吗。
+在使用new调用时，他们用于创建包裹对象的全局类；
+而作为普通函数调用，则用于执行手动数据类型转换。
+Number("3") 	// => 3
+String(false) 	// => "false"
+Boolean([]) 	// => true
+Object(3) 		// => new Number(3)
+
+
+Note that any value other than null or undefined has a toString() method and the result of this method is usually the same as that returned by the String() function. Also note that Table 3-2 shows a TypeError if you attempt to convert null or undefined to an object. The Object() function does not throw an exception in this case: instead it simply returns a newly created empty object.
+
+所有数据类型，除了null和undefined，还都有一个toString()方法，效果和String()是一样的。null和undefined若转换成对象会报一个TypeError错误，但是用Object()进行转换，不会报错，只会回返一个空对象。
+
+
+Certain JavaScript operators perform implicit type conversions, and are sometimes used for the purposes of type conversion. If one operand of the + operator is a string, it converts the other one to a string. The unary + operator converts its operand to a number. And the unary !operator converts its operand to a boolean and negates it.
+These facts lead to the following type conversion idioms that you may see in some code:
+x + "" 	// Same as String(x)
++x 		// Same as Number(x). You may also see x-0
+!!x 	// Same as Boolean(x). Note double !
+
+由于某些运算符在运算前也会执行类型转换，因此也可以被用来做手动的类型转换：
+1、如果+号的一个运算符是字符串，另一个也会被转换成字符串：
+x + ""  // 效果等价于String(x)
+2、一元运算符+-会将值转化为数字
++x 		// 效果等价于Number(x)
+x-0		// 效果一样
+3、!将值转换为与本身相反的布尔值
+!!x 	// 双!等价于Boolean(x)
+
+
+Formatting and parsing numbers are common tasks in computer programs and JavaScript has specialized functions and methods that provide more precise control over number-to-string and string-to-number conversions.
+The toString() method defined by the Number class accepts an optional argument that specifies a radix, or base, for the conversion. If you do not specify the argument, the conversion is done in base 10. However, you can also convert numbers in other bases (between 2 and 36). For example:
+var n = 17;
+binary_string = n.toString(2); 		// Evaluates to "10001"
+octal_string = "0" + n.toString(8); // Evaluates to "021"
+hex_string = "0x" + n.toString(16); // Evaluates to "0x11"
+
+数字的解析和排版比较常用，所以JavaScript专门定义了一系列方法，用于数字和字符串的转换。
+所有数字都自带toString()方法，可选参数用于规定进制，默认为十进制：
+var n = 17;
+n.toString(2); 			// "10001"
+"0" + n.toString(8); 	// "021"
+"0x" + n.toString(16);  // "0x11"
+
+
+When working with financial or scientific data, you may want to convert numbers to strings in ways that give you control over the number of decimal places or the number of significant digits in the output, or you may want to control whether exponential notation is used. The Number class defines three methods for these kinds of number-to-string conversions. toFixed() converts a number to a string with a specified number of digits after the decimal point. It never uses exponential notation. toExponential() converts a number to a string using exponential notation, with one digit before the decimal point and a specified number of digits after the decimal point (which means that the number of significant digits is one larger than the value you specify). toPrecision() converts a number to a string with the number of significant digits you specify. It uses exponential notation if the number of significant digits is not large enough to display the entire integer portion of the number. Note that all three methods round the trailing digits or pad with zeros as appropriate. Consider the following examples:
+var n = 123456.789;
+n.toFixed(0); 		// "123457"
+n.toFixed(2); 		// "123456.79"
+n.toFixed(5); 		// "123456.78900"
+n.toExponential(1); // "1.2e+5"
+n.toExponential(3); // "1.235e+5"
+n.toPrecision(4); 	// "1.235e+5"
+n.toPrecision(7); 	// "123456.8"
+n.toPrecision(10); 	// "123456.7890"
+
+金融或科学计算需要控制小数点位置、有效数字个数或科学计数法的使用：
+var n = 123456.789;
+1、toFixed(x) 精确到小数点后x位：
+n.toFixed(0); 	// "123457"
+n.toFixed(2); 	// "123456.79"
+n.toFixed(5); 	// "123456.78900"
+2、toExponential(x) 科学计数法，精确到小数点后x位
+n.toExponential(1); // "1.2e+5"
+n.toExponential(3); // "1.235e+5"
+3、toPrecision(x) 保留x位有效数字
+n.toPrecision(4); 	// "1.235e+5"
+n.toPrecision(7); 	// "123456.8"
+n.toPrecision(10); 	// "123456.7890"
+
+
+If you pass a string to the Number() conversion function, it attempts to parse that string as an integer or floating-point literal. That function only works for base-10 integers, and does not allow trailing characters that are not part of the literal. The parseInt() and parseFloat() functions (these are global functions, not methods of any class) are more flexible. parseInt() parses only integers, while parseFloat() parses both integers and floating-point numbers. If a string begins with “0x” or “0X”, parseInt() interprets it as a hexadecimal number.
+In ECMAScript 3, parseInt() may parse a string that begins with “0” (but not “0x” or “0X”) as an octal number or as a decimal number. Because the behavior is unspecified, you should never use parseInt() to parse numbers with leading zeros, unless you explicitly specify the radix to be used! In ECMAScript 5, parseInt() only parses octal numbers if you explicitly pass 8 as the second argument.
+Both parseInt() and parseFloat() skip leading white-space, parse as many numeric characters as they can, and ignore anything that follows.
+If the first nonspace character is not part of a valid numeric literal, they return NaN:
+parseInt("3 blind mice") 	// => 3
+parseFloat(" 3.14 meters") 	// => 3.14
+parseInt("-12.34") 			// => -12
+parseInt("0xFF") 			// => 255
+parseInt("-0XFF") 			// => -255
+parseFloat(".1") 			// => 0.1
+parseInt("0.1") 			// => 0
+parseInt(".1") 				// => NaN: integers can't start with "."
+parseFloat("$72.47"); 		// => NaN: numbers can't start with "$"
+parseInt()accepts an optional second argument specifying the radix (base) of the
+number to be parsed. Legal values are between 2 and 36. For example:
+parseInt("11", 2); 			// => 3 (1*2 + 1)
+parseInt("ff", 16); 		// => 255 (15*16 + 15)
+parseInt("zz", 36); 		// => 1295 (35*36 + 35)
+parseInt("077", 8); 		// => 63 (7*8 + 7)
+parseInt("077", 10); 		// => 77 (7*10 + 7)
+
+用于转换数字的Number()函数有不少局限性。
+首先，它只能处理10进制，更麻烦的是要转换的字符串中不能有非数字。
+于是我们需要parseInt()和parseFloat()函数，它俩是全局函数。
+parseInt()用于处理整数，而parseFloat()既可以处理整数还可以处理浮点数。
+它们忽略开头的空格，忽略所有非数字字符及其以后的内容，但字符串若以非数字非空格开头它们返回NaN。
+ES3在解析非十进制数字方面能力欠佳，此能力在ES5中得到加强，以"0x"开头的字符串，将被自动识别为十六进制数。parseInt()还能接收第二个参数限定进制，范围为2到36：
+parseInt("3 blind mice") 	// => 3
+parseFloat(" 3.14 meters") 	// => 3.14
+parseInt("-12.34") 			// => -12
+parseInt("0xFF") 			// => 255
+parseInt("-0XFF") 			// => -255
+parseFloat(".1") 			// => 0.1
+parseInt("0.1") 			// => 0
+parseInt(".1") 				// => NaN 整数不能以"."开头
+parseFloat("$72.47"); 		// => NaN 数字不能以"$"开头
+parseInt("11", 2); 			// => 3 (1*2 + 1)
+parseInt("ff", 16); 		// => 255 (15*16 + 15)
+parseInt("zz", 36); 		// => 1295 (35*36 + 35)
+parseInt("077", 8); 		// => 63 (7*8 + 7)
+parseInt("077", 10); 		// => 77 (7*10 + 7)
