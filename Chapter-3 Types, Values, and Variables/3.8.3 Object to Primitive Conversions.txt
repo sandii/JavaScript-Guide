@@ -1,0 +1,165 @@
+3.8.3 Object to Primitive Conversions
+
+3.8.3 对象转换为基本类型
+
+
+Object-to-boolean conversions are trivial: all objects (including arrays and functions) convert to true. This is so even for wrapper objects: new Boolean(false) is an object rather than a primitive value, and so it converts to true.
+
+对象转布尔值比较单纯，所有对象，包括数组、函数和空对象都为true。包裹对象也一样，连new Boolean(false)都为true：
+!!{} //=>true
+
+
+Object-to-string and object-to-number conversions are performed by invoking a method of the object to be converted. This is complicated by the fact that JavaScript objects have two different methods that perform conversions, and it is also complicated by some special cases described below. 
+
+对象转为数字或字符串比较复杂。因为：
+1、对象需要调用两个不同的方法来完成转换；
+2、有些特例需要专门注意（下面会详述）。
+
+
+Note that the string and number conversion rules described here apply only to native objects. Host objects (defined by web browsers, for example) can convert to numbers and strings according to their own algorithms.
+
+注意，对象转换为数字和字符串的规则只适用于本地对象。
+宿主对象（比如，浏览器自带对象）转换为数字和字符串，有自己的规则。
+
+
+All objects inherit two conversion methods. The first is called toString(), and its job
+is to return a string representation of the object. The default toString() method does
+not return a very interesting value (though we’ll find it useful in Example 6-4):
+({x:1, y:2}).toString() // => "[object Object]"
+
+
+执行转换需要调用两个方法。
+第一个是toString()，返回一个字符串，用于描述目标对象。
+通常情况下，返回的字符串很无趣：
+({x:1, y:2}).toString() // => "[object Object]"
+我们在例6-4中才会发现其实这很有用。
+
+
+Many classes define more specific versions of the toString() method. The toString()
+method of the Array class, for example, converts each array element to a string and
+joins the resulting strings together with commas in between. The toString() method
+of the Function class returns an implementation-defined representation of a function.
+In practice, implementations usually convert user-defined functions to strings of JavaScript source code. The Date class defines a toString() method that returns a human-readable (and JavaScript-parsable) date and time string. The RegExp class defines a toString() method that converts RegExp objects to a string that looks like a RegExp literal:
+[1,2,3].toString() 					// => "1,2,3"
+(function(x) { f(x); }).toString() 	// => "function(x) {\n f(x);\n}"
+/\d+/g.toString() 					// => "/\\d+/g"
+new Date(2010,0,1).toString() 		// => "Fri Jan 01 2010 00:00:00 GMT-0800 (PST)"
+
+数组、函数、正则和日期对象的toString()方法比较特别:
+1、数组：将所有元素分别转为字符串，并用逗号拼接；
+2、函数：返回整个函数的源码，但通常只对用户自定义的函数有效；
+3、正则：返回正则表达式的字符串形式；
+4、日期：返回一个可读的日期时间字符串。
+[1,2,3].toString() 					// => "1,2,3"
+(function(x) { f(x); }).toString() 	// => "function(x) {\n f(x);\n}"
+/\d+/g.toString() 					// => "/\\d+/g"
+new Date(2010,0,1).toString() 		// => "Fri Jan 01 2010 00:00:00 GMT-0800 (PST)"
+
+
+The other object conversion function is called valueOf(). The job of this method is less
+well-defined: it is supposed to convert an object to a primitive value that represents the
+object, if any such primitive value exists. Objects are compound values, and most objects cannot really be represented by a single primitive value, so the default valueOf()
+method simply returns the object itself rather than returning a primitive. Wrapper classes define valueOf() methods that return the wrapped primitive value. Arrays,
+functions, and regular expressions simply inherit the default method. Calling
+valueOf() for instances of these types simply returns the object itself. The Date class
+defines a valueOf() method that returns the date in its internal representation: the
+number of milliseconds since January 1, 1970:
+var d = new Date(2010, 0, 1); 	// January 1st, 2010, (Pacific time)
+d.valueOf() 					// => 1262332800000
+
+第二种方法是valueOf()。
+它的用处更少。
+这个方法的本意是将对象转换为一个基础类型的值，用来表示这个对象。
+但是，对象是一系列值的复合体，大多数对象并不是一个基础类型的值所能表达的，
+遇到这种情况，该方法就只好将目标对象原样返回。
+1、数组、函数、正则和大多数普通对象都如同上述情况，原样返回；
+2、包裹对象比较方便，直接返回其中包裹的基础类型值；
+3、日期对象的valueOf()比较特别，返回1970年1月1日至今的毫秒数。
+new String("ddd").valueOf();   	// => "ddd"
+var d = new Date(2010, 0, 1); 	// January 1st, 2010, (Pacific time)
+d.valueOf() 					// => 1262332800000
+
+
+With the toString() and valueOf() methods explained, we can now cover object-to-string and object-to-number conversions. Do note, however, that there are some special cases in which JavaScript performs a different object-to-primitive conversion. These special cases are covered at the end of this section.
+To convert an object to a string, JavaScript takes these steps:
+• If the object has a toString() method, JavaScript calls it. If it returns a primitive
+value, JavaScript converts that value to a string (if it is not already a string) and
+returns the result of that conversion. Note that primitive-to-string conversions are
+all well-defined in Table 3-2.
+• If the object has no toString() method, or if that method does not return a primitive
+value, then JavaScript looks for a valueOf() method. If the method exists, JavaScript calls it. If the return value is a primitive, JavaScript converts that value to a string (if it is not already) and returns the converted value.
+• Otherwise, JavaScript cannot obtain a primitive value from either toString() or
+valueOf(), so it throws a TypeError.
+To convert an object to a number, JavaScript does the same thing, but it tries the
+valueOf() method first:
+• If the object has a  valueOf() method that returns a primitive value, JavaScript converts (if necessary) that primitive value to a number and returns the result.
+• Otherwise, if the object has a toString() method that returns a primitive value,
+JavaScript converts and returns the value.
+• Otherwise, JavaScript throws a TypeError.
+
+知道了以上的两种方法，我们终于可以讲对象转数字和对象转字符串了。
+对象转字符串的具体步骤：
+• 先用toString()，若成功得到基础类型，再将它转换成字符串。
+• 若对象没有toString()或者使用toString()未能得到基础类型，那就用valueOf()，若得到基础类型，再将它转换为字符串。
+• 如果用toString()和valueOf()都得不到基础类型，抛出TypeError。
+对象转数字的过程和这个一样，只不过它先试valueOf()再试toString()。
+
+
+The details of this object-to-number conversion explain why an empty array converts to the number 0 and why an array with a single element may also convert to a number.
+Arrays inherit the default valueOf() method that returns an object rather than a primitive value, so array-to-number conversion relies on the toString() method. Empty arrays convert to the empty string. And the empty string converts to the number 0. An array with a single element converts to the same string that that one element does. If an array contains a single number, that number is converted to a string, and then back to a number.
+
+这就能解释为什么空数组转数字得到0：
+数组的valueOf()只能返回本身，于是再用toString()，得到""，空字符串转数字得到0。
+同理，单元素数组转数字，如果元素为数字得到数字，如果元素为非数字得到NaN。多元素数组转数字均得到NaN。
+
+
+The + operator in JavaScript performs numeric addition and string concatenation. If
+either of its operands is an object, JavaScript converts the object using a special object-to-primitive conversion rather than the object-to-number conversion used by the other
+arithmetic operators. The == equality operator is similar. If asked to compare an object
+with a primitive value, it converts the object using the object-to-primitive conversion.
+The object-to-primitive conversion used by + and == includes a special case for Date
+objects. The Date class is the only predefined core JavaScript type that defines meaningful conversions to both strings and numbers. The object-to-primitive conversion is
+basically an object-to-number conversion (valueof()first) for all objects that are not
+dates, and an object-to-string conversion (toString()first) for Date objects. The conversion is not exactly the same as those explained above, however: the primitive value returned by valueOf() or toString() is used directly without being forced to a number or string.
+
+JavaScript的+运算符有两个功能：链接字符串和数字加法。
+若运算数中有一个是对象，JavaScript会自动执行“对象转基础类型”。
+而其他算术运算符在此情况中会执行“对象转数字”。
+类似地，==运算符，若比较的值中有一个是对象，也执行“对象转基础类型”。
+但是，它们在处理日期对象的时候比较特殊。
+日期对象是JavaScript中唯一一种定义了有意义的转字符串和数字方法的内置对象。
+一般来说，“对象转基础类型”会优先转数字（先执行valueOf()）再转字符串（再执行toString()）。
+而日期对象相反，优先转字符串再转数字。
+转换的过程和之前说过的略有不同：
+valueOf()或toString()方法返回的值不会被强制转换成数字或字符串。
+
+
+The < operator and the other relational operators perform object-to-primitive conversions like  == does, but without the special case for Date objects: any object is converted
+by trying valueOf() first and then toString(). Whatever primitive value is obtained is
+used directly, without being further converted to a number or string.
+
+<运算符和其他关系运算符也和同样会执行“对象转数字”。
+但是对日期对象并不做特殊处理。
+对所有对象都是先valueOf()再toString()。
+
+
++, ==, != and the relational operators are the only ones that perform this special kind of
+string-to-primitive conversions. Other operators convert more explicitly to a specified
+type and do not have any special case for Date objects. The -operator, for example,
+converts its operands to numbers. The following code demonstrates the behavior of
++, -, ==, and >with Date objects:
+var now = new Date(); 	// Create a Date object
+typeof (now + 1) 		// => "string": + converts dates to strings
+typeof (now - 1) 		// => "number": - uses object-to-number conversion
+now == now.toString() 	// => true: implicit and explicit string conversions
+now > (now - 1)			// => true: > converts a Date to a number
+
+
++、==、<等运算符会对象转执行类型转换的操作，优先转为数字，而且直接使用valueOf或toString的返回值，不再对返回值做类型转换。其中+、==和！=对Date对象会做特殊处理，使其优先转为字符串：
+var now = new Date();
+typeof (now + 1) 		// => "string": +把Date对象转为字符串
+typeof (now - 1) 		// => "number": -把Date对象转为数字
+now == now.toString() 	// => true: ==把Date对象转为字符串
+now > (now - 1)			// => true: >和-把Date对象转为数字
+
+
