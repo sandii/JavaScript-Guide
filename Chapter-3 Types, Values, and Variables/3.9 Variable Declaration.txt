@@ -1,0 +1,59 @@
+3.9 Variable Declaration
+
+3.9 变量声明
+
+
+Before you use a variable in a JavaScript program, you should declare it. Variables are declared with the var keyword, like this:
+var i;
+var sum;
+You can also declare multiple variables with the same varkeyword:
+var i, sum;
+And you can combine variable declaration with variable initialization:
+var message = "hello";
+var i = 0, j = 0, k = 0;
+If you don’t specify an initial value for a variable with the var statement, the variable is declared, but its value is undefined until your code stores a value into it.
+
+JavaScript变量声明使用var关键字，如果声明时不赋值，那么变量的值为undefined。
+var i;
+var sum;
+var i, sum;
+var message = "hello";
+var i = 0, j = 0, k = 0;
+
+
+Note that the var statement can also appear as part of the for and for/in loops (introduced in Chapter 5), allowing you to succinctly declare the loop variable as part of the
+loop syntax itself. For example:
+for(var i = 0; i < 10; i++) console.log(i);
+for(var i = 0, j=10; i < 10; i++,j--) console.log(i*j);
+for(var p in o) console.log(p);
+
+循环中var的使用：
+for(var i = 0; i < 10; i++) console.log(i);
+for(var i = 0, j=10; i < 10; i++,j--) console.log(i*j);
+for(var p in o) console.log(p);
+
+
+If you’re used to statically typed languages such as C or Java, you will have noticed that there is no type associated with JavaScript’s variable declarations. A JavaScript variable can hold a value of any type. For example, it is perfectly legal in JavaScript to assign a number to a variable and then later assign a string to that variable:
+var i = 10;
+i = "ten";
+
+声明和赋值时不需要关心变量的数据类型:
+var i = 10;
+i = "ten";
+
+
+3.9.1 Repeated and Omitted Declarations
+
+3.9.1 重复声明和省略声明
+
+
+It is legal and harmless to declare a variable more than once with the var statement. If the repeated declaration has an initializer, it acts as if it were simply an assignment statement.
+
+JavaScript中，重复声明变量是合法且无害的。
+
+
+If you attempt to read the value of an undeclared variable, JavaScript generates an error. In ECMAScript 5 strict mode (§5.7.3), it is also an error to assign a value to an undeclared variable. Historically, however, and in non-strict mode, if you assign a value to an undeclared variable, JavaScript actually creates that variable as a property of the global object, and it works much like (but not exactly the same as, see §3.10.2) a properly declared global variable. This means that you can get away with leaving your global variables undeclared. This is a bad habit and a source of bugs, however, and you should always declare your variables with var.
+
+试图读未声明的变量会报错，在ES5的严格模式下，为未声明的变量赋值也会报错。但在通常情况下，这种操作会创建一个全局变量，尽管和正常声明的全局变量略有不同（见§3.10.2），但可以正常使用。但这种污染全局变量的操作容易导致bug，所以要杜绝这种用法。
+
+
