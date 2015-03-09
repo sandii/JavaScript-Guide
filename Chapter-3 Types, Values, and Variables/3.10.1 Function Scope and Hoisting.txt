@@ -1,0 +1,68 @@
+3.10.1 Function Scope and Hoisting
+
+3.10.1 函数作用域与声明提前
+
+
+In some C-like programming languages, each block of code within curly braces has itsown scope, and variables are not visible outside of the block in which they are declared. This is called block scope, and JavaScript does not have it. Instead, JavaScript uses function scope: variables are visible within the function in which they are defined and within any functions that are nested within that function.
+In the following code, the variables  i,  j, and k are declared in different spots, but all
+have the same scope—all three are defined throughout the body of the function:
+function test(o) {
+	var i = 0; 						// i is defined throughout function
+	if (typeof o == "object") {
+		var j = 0; 					// j is defined everywhere, not just block
+		for(var k=0; k < 10; k++) { // k is defined everywhere, not just loop
+			console.log(k); 		// print numbers 0 through 9
+		}
+		console.log(k); 			// k is still defined: prints 10
+	}
+	console.log(j);					// j is defined, but may not be initialized
+}
+
+有些与C类似的语言中，其作用域都是以花括号界定，而JavaScript作用域以函数界定。以下的例子中，i、j、k的作用域均为整个函数内：
+function test(o) {
+	var i = 0; 						// i全函数内可见
+	if (typeof o == "object") {
+		var j = 0; 					// j全函数内可见，不仅限于if语句块内
+		for(var k=0; k < 10; k++) { // k全函数内可见，不仅限于for循环内
+			console.log(k); 		// 0123456789
+		}
+		console.log(k); 			// =>10 k此处依然可见
+	}
+	console.log(j);					// j全函数可见，其值可能为0，可能为undefined
+}
+
+
+JavaScript’s function scope means that all variables declared within a function are visible throughout the body of the function. Curiously, this means that variables are even visible before they are declared. This feature of JavaScript is informally known as hoisting: JavaScript code behaves as if all variable declarations in a function (but not any associated assignments) are “hoisted” to the top of the function. Consider the following code:
+var scope = "global";
+function f() {
+	console.log(scope);  // Prints "undefined", not "global"
+	var scope = "local"; // Variable initialized here, but defined everywhere
+	console.log(scope);  // Prints "local"
+}
+You might think that the first line of the function would print “global”, because the var statement declaring the local variable has not yet been executed. Because of the rules of function scope, however, this is not what happens. The local variable is defined throughout the body of the function, which means the global variable by the same name is hidden throughout the function. Although the local variable is defined throughout, it is not actually initialized until the vars tatement is executed. Thus, the function above is equivalent to the following, in which the variable declaration is “hoisted” to the top and the variable initialization is left where it is:
+function f() {
+	var scope; 			// Local variable is declared at the top of the function
+	console.log(scope); // It exists here, but still has "undefined" value
+	scope = "local"; 	// Now we initialize it and give it a value
+	console.log(scope); // And here it has the value we expect
+}
+
+所有变量在其函数内可见意味着在函数内的任意位置都能访问，哪怕是在被声明之前，为了满足这一条件，JavaScript将函数内的所有声明提前（注意！赋值并不提前！）：
+var scope = "global";
+function f() {
+	console.log(scope);  // 输出"undefined"而非"global"，表明此处本地变量scope已声明，但未赋值
+	var scope = "local"; // 这里才赋值
+	console.log(scope);  // 输出"local"
+}
+实际的执行顺序如下：
+function f() {
+	var scope;
+	console.log(scope);
+	scope = "local";
+	console.log(scope);
+}
+
+
+In programming languages with block scope, it is generally good programming practice to declare variables as close as possible to where they are used and with the narrowest possible scope. Since JavaScript does not have block scope, some programmers make a point of declaring all their variables at the top of the function, rather than trying to declare them closer to the point at which they are used. This technique makes their source code accurately reflect the true scope of the variables.
+
+在以代码块界定变量作用域中，变量往往是在需要时才声明，以尽量缩小其作用域，避免污染。而由于JS的声明提前的特性，变量最好都放在函数最开头声明，以真实反映其作用域。
