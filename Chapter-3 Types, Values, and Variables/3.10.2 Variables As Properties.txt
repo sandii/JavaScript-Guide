@@ -1,0 +1,29 @@
+3.10.2 Variables As Properties
+
+3.10.2 作为属性的变量
+
+
+When you declare a global JavaScript variable, what you are actually doing is defining a property of the global object (§3.5). If you use var to declare the variable, the property that is created is nonconfigurable (see §6.7), which means that it cannot be deleted with the delete operator. We’ve already noted that if you’re not using strict mode and you assign a value to an undeclared variable, JavaScript automatically creates a global variable for you. Variables created in this way are regular, configurable properties of the global object and they can be deleted:
+var truevar = 1; 		// A properly declared global variable, nondeletable.
+fakevar = 2; 			// Creates a deletable property of the global object.
+this.fakevar2 = 3; 		// This does the same thing.
+delete truevar 			// => false: variable not deleted
+delete fakevar 			// => true: variable deleted
+delete this.fakevar2 	// => true: variable deleted
+
+声明一个全局变量的本质实际上是为global对象定义了一个属性。
+若用var关键字声明，这个属性将是不可配置的(see §6.7)，不能用delete关键字删除；
+相反地，不用var关键字的声明所创建的属性是可删除的。
+这也正是前面所说的用var声明和不用var声明的区别。
+var truevar = 1;
+fakevar = 2;
+this.fakevar2 = 3;
+delete truevar 			// => false 不可删除
+delete fakevar 			// => true 可删除
+delete this.fakevar2 	// => true 可删除
+
+
+JavaScript global variables are properties of the global object, and this is mandated by the ECMAScript specification. There is no such requirement for local variables, but you can imagine local variables as the properties of an object associated with each function invocation. The ECMAScript 3 specification referred to this object as the “call object,” and the ECMAScript 5 specification calls it a “declarative environment record.”
+JavaScript allows us to refer to the global object with the this keyword, but it does not give us any way to refer to the object in which local variables are stored. The precise nature of these objects that hold local variables is an implementation detail that need not concern us. The notion that these local variable objects exist, however, is an important one, and it is developed further in the next section.
+
+相对而言，本地变量就没有这个特性。然而我们可以想象，函数每次被调用时，都会有这么一个对象，该函数中所有的变量都作为属性挂在这个对象上。ES3称这个对象为“调用对象”，ES5叫“声明上下文”。这个本地变量存储的具体原理我们不需要知道，但是这个概念却十分重要，尽管我们不能像调用global对象那样在代码中直接调用它。
