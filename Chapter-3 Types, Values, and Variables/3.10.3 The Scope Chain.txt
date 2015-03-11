@@ -1,0 +1,60 @@
+3.10.3 The Scope Chain
+
+3.10.3 作用域链
+
+
+JavaScript is a lexically scoped language: the scope of a variable can be thought of as the set of source code lines for which the variable is defined. Global variables are defined throughout the program. Local variables are defined throughout the function in which they are declared, and also within any functions nested within that function.
+
+JavaScript是一门“以词法划分作用域”的语言。
+也就是说，作用域可以被认为是变量所能影响的源代码范围。
+全局变量在整个程序中均可见。
+本地变量只在它被声明的函数及其内嵌的子函数中可见。
+
+
+If we think of local variables as properties of some kind of implementation-defined object, then there is another way to think about variable scope. Every chunk of JavaScript code (global code or functions) has a scope chain associated with it. This scope chain is a list or chain of objects that defines the variables that are “in scope” for that code. 
+
+若我们认为，本地变量是某种程序内置对象的属性，
+那么我们还能这么理解变量作用域：
+每个代码块（全局代码或各个函数），都有一个与之相关的作用域链。
+这个作用域链是一个包含一系列对象的列表，这些对象上挂载着该作用域中的声明变量。
+
+
+When JavaScript needs to look up the value of a variable x (a process called variable resolution), it starts by looking at the first object in the chain. If that object has a property named x, the value of that property is used. If the first object does not have a property named x, JavaScript continues the search with the next object in the chain. If the second object does not have a property named x, the search moves on to the next object, and so on. If x is not a property of any of the objects in the scope chain, then x is not in scope for that code, and a ReferenceError occurs.
+
+当JavaScript需要查询变量x的值时，
+它首先查找作用域链中的第一个对象，
+若这个对象含有名为x的属性，那么这个属性的值将被采用。
+若在第一个对象中找不到属性x，
+JavaScript将继续查找下一个作用域链中的对象，以此类推。
+若在整条作用域链的对象中都找不到x，
+那么，变量x即在作用域之外，
+系统将抛出一个ReferenceError。
+
+
+In top-level JavaScript code (i.e., code not contained within any function definitions), the scope chain consists of a single object, the global object. In a non-nested function, the scope chain consists of two objects. The first is the object that defines the function’s parameters and local variables, and the second is the global object. In a nested function, the scope chain has three or more objects. 
+
+在顶层JavaScript代码中（并未包含在任何函数内的代码），
+其作用域链上只有一个对象，即全局对象。
+在第一层函数中，作用域链中包含两个对象，
+第一个对象上挂载着函数的参数和本地变量，
+第二个是全局对象。
+在嵌套函数中，作用域链上包含三个或更多对象。
+
+
+It is important to understand how this chain of objects is created. When a function is defined, it stores the scope chain then in effect. When that function is invoked, it creates a new object to store its local variables, and adds that new object to the stored scope chain to create a new, longer, chain that represents the scope for that function invocation. 
+
+理解作用域链创建的具体过程很重要。
+当一个函数被声明时，系统将自动储存函数声明处的作用域链。
+当这个函数被调用时，系统将创建一个新对象，储存上所有本地变量，
+并将这个对象和之前储存下来的作用域链拼接成一条新的作用域链，
+用于表示此函数的作用域。
+
+
+This becomes more interesting for nested functions because each time the outer function is called, the inner function is defined again. Since the scope chain differs on each invocation of the outer function, the inner function will be subtly different each time it is defined—the code of the inner function will be identical on each invocation of the outer function, but the scope chain associated with that code will be different.
+This notion of a scope chain is helpful for understanding the with statement (§5.7.1) and is crucial for understanding closures (§8.6).
+
+对于嵌套函数来说，这个过程会变得更加有趣，
+因为每次调用外层函数，内部函数都会被重新定义一遍。
+由于外部函数中每次被调用时，其所处位置的作用域链都是不一样的。
+所以，内部函数所储存下来的作用域链也会随之发生微妙的变化。
+理解这个问题有助于学习with语句（§5.7.1），也是理解闭包（§8.6）的关键。
