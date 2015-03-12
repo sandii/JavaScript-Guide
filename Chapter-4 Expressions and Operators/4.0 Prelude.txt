@@ -1,0 +1,34 @@
+CHAPTER 4 Expressions and Operators
+
+第4章 表达式与运算符
+
+
+An expression is a phrase of JavaScript that a JavaScript interpreter can evaluate to produce a value. A constant embedded literally in your program is a very simple kind of expression. A variable name is also a simple expression that evaluates to whatever value has been assigned to that variable. 
+
+表达式是JavaScript中的语段。通过解析表达式，JavaScript解释器可以得到一个结果值。
+程序中的常量、变量就是最简单的表达式。
+
+
+Complex expressions are built from simpler expressions. An array access expression, for example, consists of one expression that evaluates to an array followed by an open square bracket, an expression that evaluates to an integer, and a close square bracket. This new, more complex expression evaluates to the value stored at the specified index of the specified array. Similarly, a function invocation expression consists of one expression that evaluates to a function object and zero or more additional expressions that are used as the arguments to the function.
+
+复杂表达式是由简单表达式组成的。
+比如，数组访问表达式是由两部分组成：
+前一部分是一个可以得到数组的表达式，
+后一部分是一对方括号，其中的表达式可以得到一个整数。
+整个表达式可以得到储存在数组特定索引位置的元素。
+函数调用表达式类似，
+前一部分得到函数对象，
+后一部分是一对圆括号，其中是零个或多个表达式，得到的值作为函数的参数。
+
+
+The most common way to build a complex expression out of simpler expressions is with an operator. An operator combines the values of its operands (usually two of them) in some way and evaluates to a new value. The multiplication operator * is a simple example. The expression  x * y evaluates to the product of the values of the expressions x and y. For simplicity, we sometimes say that an operator returns a value rather than “evaluates to” a value.
+
+使用简单表达式创建复杂表达式最常见的方法是使用运算符。
+运算符可以将一个或多个值通过计算得到一个新值。
+比如，x * y得到x和y的乘积。
+方便起见，我们有时说用运算符“返回”一个值，而非“求得”。
+
+
+This chapter documents all of JavaScript’s operators, and it also explains expressions (such as array indexing and function invocation) that do not use operators. If you already know another programming language that uses C-style syntax, you’ll find that the syntax of most of JavaScript’s expressions and operators is already familiar to you.
+
+本章将介绍所有JavaScript运算符，也会详述那些不使用运算符的表达式，比如访问数组元素和调用函数。若你已会一门C类语言，看这章就比较轻松了。
