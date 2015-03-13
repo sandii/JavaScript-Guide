@@ -1,0 +1,60 @@
+4.1 Primary Expressions
+
+4.1 基础表达式
+
+
+The simplest expressions, known as primary expressions, are those that stand alone—
+they do not include any simpler expressions. Primary expressions in JavaScript are
+constant or literal values, certain language keywords, and variable references.
+Literals are constant values that are embedded directly in your program. They look like
+these:
+1.23 		// A number literal
+"hello" 	// A string literal
+/pattern/ 	// A regular expression literal
+JavaScript syntax for number literals was covered in §3.1. String literals were documented in §3.2. The regular expression literal syntax was introduced in §3.2.4 and will be documented in detail in Chapter 10.
+
+最简单的表达式叫做基础表达式，它们独自存在不可再细分。
+JavaScript中的基础表达式包括常量或直接量的值、关键字和变量引用。
+直接量是直接写在程序中的常数值。
+1.23 		// 数字直接量（§3.1）
+"hello" 	// 字符串直接量（§3.2）
+/pattern/ 	// 正则表达式直接量（§3.2.4以及第10章）
+
+
+Some of JavaScript’s reserved words are primary expressions:
+true 		// Evaluates to the boolean true value
+false 		// Evaluates to the boolean false value
+null 		// Evaluates to the null value
+this 		// Evaluates to the "current" object
+We learned about true, false, and null in §3.3 and §3.4. Unlike the other keywords,
+this is not a constant—it evaluates to different values in different places in the program.
+The this keyword is used in object-oriented programming. Within the body of a method, this evaluates to the object on which the method was invoked. See §4.5, Chapter 8(especially §8.2.2), and Chapter 9 for more on this.
+
+JavaScript的很多保留字都可以作为基础表达式：
+true
+false
+null
+this
+在§3.3和§3.4中我们已经了解过了false、true和null。
+this和其他关键字不同，它并非一个常量，
+在程序的不同位置，它的值也不相同。
+this关键字用于面向对象编程。
+在一个方法中，this指向调用该方法的对象。
+§4.5、第8章（§8.2.2）和第9中有更加详细的介绍。
+
+
+Finally, the third type of primary expression is the bare variable reference:
+i 			// Evaluates to the value of the variable i.
+sum 		// Evaluates to the value of the variable sum.
+undefined 	// undefined is a global variable, not a keyword like null.
+When any identifier appears by itself in a program, JavaScript assumes it is a variable
+and looks up its value. If no variable with that name exists, the expression evaluates to
+the undefined value. In the strict mode of ECMAScript 5, however, an attempt to evaluate a nonexistent variable throws a ReferenceError instead.
+
+最后，第三类基础表达式是变量的单独引用：
+i
+sum
+undefined 	// undefined是一个全局变量，并非关键字
+当一个标识符单独出现在程序中，JavaScript会认为它是一个变量，并查询它的值。若该变量不存在，则为他赋值为undefined。然而在ES5严格模式用，则会抛出ReferenceError错误。
+
+
