@@ -1,0 +1,72 @@
+4.2 Object and Array Initializers
+
+4.2 对象和数组初始化表达式
+
+
+Object and array initializersare expressions whose value is a newly created object or array. These initializer expressions are sometimes called “object literals” and “array literals.” Unlike true literals, however, they are not primary expressions, because they include a number of subexpressions that specify property and element values. Array initializers have a slightly simpler syntax, and we’ll begin with those.
+
+对象和数组初始化表达式的值为新建的对象和数组。
+这些初始化表达式有时被称为对象直接量和数组直接量。
+和真正的直接量不同，它们并非基础表达式，
+而是包含了多个子表达式，用来界定其属性或元素的值。
+数组初始化表达式的语法相对简单一些，我们就从它开始介绍。
+
+
+An array initializer is a comma-separated list of expressions contained within square brackets. The value of an array initializer is a newly created array. The elements of this new array are initialized to the values of the comma separated expressions: 
+[] 			// An empty array: no expressions inside brackets means no elements 
+[1+2,3+4] 	// A 2-element array. First element is 3, second is 7 
+The element expressions in an array initializer can themselves be array initializers, which means that these expressions can create nested arrays:
+var matrix = [[1,2,3], [4,5,6], [7,8,9]];
+
+数组初始化表达式是一个表达式列表，以逗号分隔，被包含在一对方括号中。
+数组初始化表达式的值就是一个新建的数组。
+这个新建数组中元素分别对应逗号分隔的表达式的值。
+[] 			// 空数组，方括号中没有表达式表示其中没有元素
+[1+2,3+4] 	// 一个含有两个元素的数组，第一个为3，第二个是7
+表示元素的表达式本身也可以是数组，
+也就是说用数组初始化表达式可以创建互相嵌套的数组：
+var matrix = [[1,2,3], [4,5,6], [7,8,9]];
+
+
+The element expressions in an array initializer are evaluated each time the array initializer is evaluated. This means that the value of an array initializer expression may be different each time it is evaluated. Undefined elements can be included in an array literal by simply omitting a value between commas. For example, the following array contains five elements, including three undefined elements:
+var sparseArray = [1,,,,5];
+A single trailing comma is allowed after the last expression in an array initializer and does not create an undefined element.
+
+每次使用数组初始化表达式，其元素中的表达式都要重新计算一遍。
+这就是说，数组初始化表达式每次使用，值可能是不一样的。
+在数组直接量中，省略逗号之间的内容，会创建一个undefined的元素。
+例如，下面的数组含有5个元素，其中三个是undefined：
+var sparseArray = [1,,,,5]；
+但是，若逗号在最后会被省略，并不创建undefined元素。
+
+
+Object initializer expressions are like array initializer expressions, but the square brackets are replaced by curly brackets, and each subexpression is prefixed with a property name and a colon:
+var p = { x:2.3, y:-1.2 }; 	// An object with 2 properties
+var q = {}; 				// An empty object with no properties
+q.x = 2.3; q.y = -1.2; 		// Now q has the same properties as p
+Object literals can be nested. For example:
+var rectangle = { upperLeft: { x: 2, y: 2 },
+lowerRight: { x: 4, y: 5 } };
+
+对象初始化表达式和数组类似，但是使用的是花括号。
+其中表示属性的子表达式之前都有一个属性名和冒号：
+var p = { x:2.3, y:-1.2 }; 	// 一个含有两个属性的对象
+var q = {}; 				// 一个空对象
+q.x = 2.3; q.y = -1.2; 		// 为q添加属性
+对象也是可以相互嵌套的：
+var rectangle = { 
+	upperLeft: { x: 2, y: 2 },
+	lowerRight: { x: 4, y: 5 }
+};
+
+
+The expressions in an object initializer are evaluated each time the object initializer is evaluated, and they need not have constant values: they can be arbitrary JavaScript expressions. Also, the property names in object literals may be strings rather than identifiers (this is useful to specify property names that are reserved words or are otherwise not legal identifiers):
+var side = 1;
+var square = { "upperLeft": { x: p.x, y: p.y },
+'lowerRight': { x: p.x + side, y: p.y + side}};
+We’ll see object and array initializers again in Chapters 6 and 7.
+
+和数组一样，每次使用对象初始化表达式，其属性对应的表达式都要重新计算一遍。
+对象的属性名可以是标识符，也可以是字符串。
+（这样，我们就可以随意设置属性名，哪怕是保留字也没有问题）
+
