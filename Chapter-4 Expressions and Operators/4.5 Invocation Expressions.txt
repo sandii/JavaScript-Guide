@@ -1,0 +1,49 @@
+4.5 Invocation Expressions
+
+4.5 调用表达式
+
+
+An invocation expression is JavaScript’s syntax for calling (or executing) a function or method. It starts with a function expression that identifies the function to be called. The function expression is followed by an open parenthesis, a comma-separated list of zero or more argument expressions, and a close parenthesis. Some examples:
+f(0) 			// f is the function expression; 0 is the argument expression.
+Math.max(x,y,z) // Math.max is the function; x, y and z are the arguments.
+a.sort() 		// a.sort is the function; there are no arguments.
+
+调用表达式用于调用（或执行）函数或方法。
+它由函数表达式加一对圆括号，括号中写零个或多个参数，以逗号分隔：
+f(0)			//参数为常量
+Math.max(x,y,z) //参数为变量
+a.sort()		//无参数
+
+
+When an invocation expression is evaluated, the function expression is evaluated first, and then the argument expressions are evaluated to produce a list of argument values. If the value of the function expression is not a callable object, a TypeError is thrown. (All functions are callable. Host objects may also be callable even if they are not functions. This distinction is explored in §8.7.7.)。
+
+函数表达式被执行时，先计算函数表达式，再计算参数列表中的表达式。
+若函数名不可调用，抛出TypeError。
+（所有函数均可可调用。一些宿主对象也是可调用的，尽管它们并非函数，这个特性会在§8.7.7中介绍）。
+
+
+Next, the argument values are assigned, in order, to the parameter names specified when the function was defined, and then the body of the function is executed. If the function uses a return statement to return a value, then that value becomes the value of the invocation expression. Otherwise, the value of the invocation expression is undefined. Complete details on function invocation, including an explanation of what happens when the number of argument expressions does not match the number of parameters in the function definition, are in Chapter 8.
+
+接着，参数值被赋给函数中的参数，然后函数体被执行。
+若函数含有return语句，那么整个函数调用语句的值即为该返回值。
+相反，整个语句的值为undefined。
+若调用函数时传入的参数个数与事先设定不符，
+以及其他关于函数调用的具体细节和原理，在第8章中会详细介绍。
+
+
+Every invocation expression includes a pair of parentheses and an expression before the open parenthesis. If that expression is a property access expression, then the invocation is known as a method invocation. In method invocations, the object or array that is the subject of the property access becomes the value of the this parameter while the body of the function is being executed. This enables an object-oriented programming paradigm in which functions (known by their OO name, “methods”) operate on the object of which they are part. See Chapter 9 for details.
+
+每一个调用表达式都包含函数表达式和一对圆括号。
+若函数表达式是一个属性访问表达式，那么这就是一次方法调用。
+方法调用中，方法函数体中的this，指向包含该方法的对象或数组。
+这个特性让我们能够使用面向对象编程中的一个范式，
+即使用函数（面向对象中称为“方法”）来操作包含它的对象。
+相关内容见第9章。
+
+
+Invocation expressions that are not method invocations normally use the global object as the value of the this keyword. In ECMAScript 5, however, functions that are defined in strict mode are invoked with undefined as their this value rather than the global object. See §5.7.3 for more on strict mode.
+
+如果这个函数被定义在最外层，并非某个对象的方法，那么函数中的this指向的就是global对象。
+但是，在ES5严格模式下，该this指向undefined。更多关于严格模式的内容，见§5.7.3。
+
+
