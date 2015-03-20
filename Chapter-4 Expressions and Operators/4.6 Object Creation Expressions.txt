@@ -1,0 +1,34 @@
+4.6 Object Creation Expressions
+
+4.6 对象创建表达式
+
+
+An object creation expression creates a new object and invokes a function (called a constructor) to initialize the properties of that object. Object creation expressions are like invocation expressions except that they are prefixed with the keyword new:
+new Object()
+new Point(2,3)
+
+对象创建表达式用于创建对象。
+它调用某个特定的函数（构造器函数），初始化对象的属性。
+创建对象表达式和函数调用很像，但是之前要使用关键字new：
+new Object()
+new Point(2,3)
+
+
+If no arguments are passed to the constructor function in an object creation expression, the empty pair of parentheses can be omitted:
+new Object
+new Date
+
+若不需要传参数，括号可以省略：
+new Object
+new Date
+
+
+When an object creation expression is evaluated, JavaScript first creates a new empty object, just like the one created by the object initializer {}. Next, it invokes the specified function with the specified arguments, passing the new object as the value of the this keyword. The function can then use this to initialize the properties of the newly created object. 
+
+用new关键字创建对象时，js会新创建一个空对象{}，并将this指向这个对象，然后就可以使用this为这个空对象添加各种属性了。
+
+
+Functions written for use as constructors do not return a value, and the value of the object creation expression is the newly created and initialized object. If a constructor does return an object value, that value becomes the value of the object creation expression and the newly created object is discarded. Constructors are explained in more detail in Chapter 9.
+
+作为构造器的函数并不返回值，new语句的值就是这个新建的对象；但是如果手动设置构造器函数返回一个对象，那么这个对象就将作为new语句的值，而原本新建的对象被随之丢弃。
+
