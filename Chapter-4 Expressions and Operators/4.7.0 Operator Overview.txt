@@ -1,0 +1,140 @@
+4.7 Operator Overview
+
+4.7 运算符概述
+
+
+Operators are used for JavaScript’s arithmetic expressions, comparison expressions, logical expressions, assignment expressions, and more. Table 4-1 summarizes the operators and serves as a convenient reference.
+
+Js中的运算符用于算术表达式、比较表达式、逻辑表达式、赋值表达式等等。
+表4-1总结了js中所有的运算符，供随时查询。
+
+
+Note that most operators are represented by punctuation characters such as + and =. Some, however, are represented by keywords such as delete and instanceof. Keyword operators are regular operators, just like those expressed with punctuation; they simply have a less succinct syntax.
+
+运算符分为符号型（+-*/）和保留字型(delete、instanceof)。两者并无本质区别。
+
+
+Table 4-1 is organized by operator precedence. The operators listed first have higher precedence than those listed last. Operators separated by a horizontal line have different precedence levels. The column labeled A gives the operator associativity, which can be L (left-to-right) or R (right-to-left), and the column N specifies the number of operands. The column labeled Types lists the expected types of the operands and (after the → symbol) the result type for the operator. The subsections that follow the table explain the concepts of precedence, associativity, and operand type. The operators themselves are individually documented following that discussion.
+
+表4-1按运算优先级顺序，列出了Js所有运算符。横线表示不同的优先级。
+A列是运算符的L（从左到右）或R（从右到左）的结合性；
+N列是运算对象的个数；
+Types列是运算对象的数据类型和返回值的数据类型。
+详情后面会逐一讲解：
+
+
+Table 4-1. JavaScript operators
+
+Operator 	Operation 						A 	N 		Types
+
+++ 			Pre- or post-increment 			R 	1 		lval→num
+-- 			Pre- or post-decrement 			R 	1 		lval→num
+- 			Negate number 					R 	1 		num→num
++ 			Convert to number 				R 	1 		num→num
+~ 			Invert bits 					R 	1 		int→int
+! 			Invert boolean value 			R 	1 		bool→bool
+————————————————————————————————————————————————————————————————————
+delete 		Remove a property 				R 	1 		lval→bool
+typeof 		Determine type of operand 		R 	1 		any→str
+void 		Return undefined value 			R 	1 		any→undef
+———————————————————————————————————————————————————————————————————
+*, /, % 	Multiply, divide, remainder 	L 	2 		num,num→num
+——————————————————————————————————————————————————————————————————
++, - 		Add, subtract 					L 	2 		num,num→num
++ 			Concatenate strings 			L 	2 		str,str→str
+——————————————————————————————————————————————————————————————————
+<< 			Shift left 						L 	2 		int,int→int
+>> 			Shift right with sign extension L 	2 		int,int→int
+>>> 		Shift right with zero extension L 	2 		int,int→int
+<, <=,>, >= Compare in numeric order 		L 	2 		num,num→bool
+<, <=,>, >= Compare in alphabetic order 	L 	2 		str,str→bool
+instanceof 	Test object class 				L 	2 		obj,func→bool
+in 			Test whether property exists 	L 	2 		str,obj→bool
+—————————————————————————————————————————————————————————————————————
+== 			Test for equality 				L 	2 		any,any→bool
+!= 			Test for inequality 			L 	2 		any,any→bool
+=== 		Test for strict equality 		L 	2 		any,any→bool
+!== 		Test for strict inequality 		L 	2 		any,any→bool
+—————————————————————————————————————————————————————————————————————
+& 			Compute bitwise AND 			L 	2 		int,int→int
+—————————————————————————————————————————————————————————————————————
+^ 			Compute bitwise XOR 			L 	2 		int,int→int
+—————————————————————————————————————————————————————————————————————
+| 			Compute bitwise OR 				L 	2 		int,int→int
+—————————————————————————————————————————————————————————————————————
+&& 			Compute logical AND 			L 	2 		any,any→any
+—————————————————————————————————————————————————————————————————————
+|| 			Compute logical OR 				L 	2 		any,any→any
+—————————————————————————————————————————————————————————————————————
+?: 			Choose 2nd or 3rd operand 		R 	3 		bool,any,any→any
+—————————————————————————————————————————————————————————————————————
+= 			Assign to a variable or propertyR 	2 		lval,any→any
+*=, /=, %=, Operate and assign 				R 	2 		lval,any→any
++=, -=, &=,
+^=, |=, <<=,
+>>=, >>>=      
+—————————————————————————————————————————————————————————————————————
+, 			Discard 1st operand, return 2nd L 	2 		any,any→any
+
+表 4-1. JS运算符
+
+运算符 	    操作 		 	 A 	N 		数据类型
+
+++ 			自增 			 R 	1 		lval→num
+-- 			自减 			 R 	1 		lval→num
+- 			负号 			 R 	1 		num→num
++ 			转为数字 		 R 	1 		num→num
+~ 			反转位 			 R 	1 		int→int
+! 			逻辑否定 		 R 	1 		bool→bool
+——————————————————————————————————————————————————
+delete 		删除属性 		 R 	1 		lval→bool
+typeof 		数据类型 		 R 	1 		any→str
+void 		返回undefined 	 R 	1 		any→undef
+——————————————————————————————————————————————————
+*, /, % 	乘除余 			 L 	2 		num,num→num
+——————————————————————————————————————————————————
++, - 		加减 			 L 	2 		num,num→num
++ 			链接字符串 		 L 	2 		str,str→str
+——————————————————————————————————————————————————
+<< 			左移			 L 	2 		int,int→int
+>> 			保留符号右移 	 L 	2 		int,int→int
+>>> 		忽略符号右移 	 L 	2 		int,int→int
+<, <=,>, >= 数字比较 		 L 	2 		num,num→bool
+<, <=,>, >= 字母比较 		 L 	2 		str,str→bool
+instanceof 	对象类名 		 L 	2 		obj,func→bool
+in 			属性存在 		 L 	2 		str,obj→bool
+——————————————————————————————————————————————————
+== 			值相等 			 L 	2 		any,any→bool
+!= 			值不等 			 L 	2 		any,any→bool
+=== 		值和类型相等 	 L 	2 		any,any→bool
+!== 		值和类型不等 	 L 	2 		any,any→bool
+——————————————————————————————————————————————————
+& 			位AND 			 L 	2 		int,int→int
+——————————————————————————————————————————————————
+^ 			位XOR 			 L 	2 		int,int→int
+——————————————————————————————————————————————————
+| 			位OR 			 L 	2 		int,int→int
+——————————————————————————————————————————————————
+&& 			逻辑AND 		 L 	2 		any,any→any
+——————————————————————————————————————————————————
+|| 			逻辑OR 			 L 	2 		any,any→any
+——————————————————————————————————————————————————
+?: 			判断 			 R 	3 		bool,any,any→any
+——————————————————————————————————————————————————
+= 			运算后赋值 		 R 	2 		lval,any→any
+*=, /=, %=, 运算后赋值 		 R 	2 		lval,any→any
++=, -=, &=,
+^=, |=, <<=,
+>>=, >>>=      
+——————————————————————————————————————————————————
+, 			丢弃第一返回第二 L 	2 		any,any→any
+
+
+
+
+
+
+
+
+
+
