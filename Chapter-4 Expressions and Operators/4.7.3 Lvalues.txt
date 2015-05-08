@@ -1,0 +1,8 @@
+4.7.3 Lvalues
+Notice that the assignment operators and a few of the other operators listed in Table 4-1 expect an operand of type lval. lvalue is a historical term that means “an expression that can legally appear on the left side of an assignment expression.” In JavaScript, variables, properties of objects, and elements of arrays are lvalues. The ECMAScript specification allows built-in functions to return lvalues but does not define any functions that behave that way.
+
+4.7.3 左值
+在表4-1中提到过赋值符号以及其他一些运算符需要操作一个“左值”类型的运算数。
+左值是个有点历史渊源的概念，指的是“可以合法出现在赋值符号左边的表达式”。
+在js中，变量、对象属性和数组元素均为左值。
+ECMAScript允许内置函数返回左值，但并未定义此类函数。
