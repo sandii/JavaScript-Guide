@@ -1,0 +1,27 @@
+4.7.4 Operator Side Effects
+4.7.4 运算符的副作用
+
+
+Evaluating a simple expression like 2 * 3 never affects the state of your program, and any future computation your program performs will be unaffected by that evaluation.
+
+简单的运算表达式，比如2 * 3并不会影响程序的状态，
+也不会影响程序以后的任何计算。
+
+
+Some expressions, however, have side effects, and their evaluation may affect the result of future evaluations. The assignment operators are the most obvious example: if you assign a value to a variable or property, that changes the value of any expression that uses that variable or property. The ++ and -- increment and decrement operators are similar, since they perform an implicit assignment. The delete operator also has side effects: deleting a property is like (but not the same as) assigning undefined to the property.
+
+但是，有些表达式会产生副作用，
+他们的计算结果将影响之后的计算。
+赋值运算符是最直观的例子：
+若将一个值赋给某个变量或属性，
+之后所有使用到该变量或属性的的表达式都会受到影响。
+++和--运算符的效果相类似，因为它们都会导致一次不太明显的赋值。
+delete运算符也有副作用：
+删除一个属性近似于（但并不等同于）给这个属性赋值为undefined。
+
+
+No other JavaScript operators have side effects, but function invocation and object creation expressions will have side effects if any of the operators used in the function or constructor body have side effects.
+
+其他js运算符都没有副作用。
+但若函数调用和对象创建表达式有用到以上几个运算符的话，也会产生副作用。
+
