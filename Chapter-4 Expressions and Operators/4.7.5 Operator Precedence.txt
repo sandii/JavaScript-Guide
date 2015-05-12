@@ -1,0 +1,48 @@
+4.7.5 Operator Precedence
+
+4.7.5 运算符优先级
+
+
+The operators listed in Table 4-1 are arranged in order from high precedence to low precedence, with horizontal lines separating groups of operators at the same precedence level. Operator precedence controls the order in which operations are performed. Operators with higher precedence (nearer the top of the table) are performed before those with lower precedence (nearer to the bottom).
+
+表4-1中列出的运算符按照其优先级从高到低排列，不同优先级以水平线分隔。
+运算符的优先级控制着运算执行先后顺序。
+优先级高的运算符比优先级低的先执行。
+
+
+Consider the following expression:
+w = x + y * z;
+The multiplication operator * has a higher precedence than the addition operator +, so the multiplication is performed before the addition. Furthermore, the assignment operator = has the lowest precedence, so the assignment is performed after all the operations on the right side are completed. 
+
+例如以下的表达式：
+w = x + y * z;
+乘法运算符*比加法运算符+的优先级高，所以先执行乘法。
+而赋值运算符=优先级最低，所有其他运算都结束后才执行赋值。
+
+
+Operator precedence can be overridden with the explicit use of parentheses. To force the addition in the previous example to be performed first, write:
+w = (x + y) * z;
+
+圆括号用于特别指定提高优先级。
+若要指定之前的表达式中的加法优先执行：
+w = (x + y) * z;
+
+
+Note that property access and invocation expressions have higher precedence than any of the operators listed in Table 4-1. Consider this expression:
+typeof my.functions[x](y)
+Although typeof is one of the highest-priority operators, the typeof operation is performed on the result of the two property accesses and the function invocation.
+
+注意，属性访问和函数调用表达式比表4-1中的所有运算符的优先级都高：
+typeof my.functions[x](y)
+虽然typeof是优先级最高的运算符之一，
+但在上例中，它要在属性访问和函数调用之后才执行。
+
+
+In practice, if you are at all unsure about the precedence of your operators, the simplest thing to do is to use parentheses to make the evaluation order explicit. The rules that are important to know are these: multiplication and division are performed before addition and subtraction, and assignment has very low precedence and is almost always performed last.
+
+实际工作中，若不确定运算符的优先级，
+最简单的方法是使用圆括号指定运算顺序。
+但基本还是了解：乘除优先于加减，赋值通常优先级最低。
+
+
+
