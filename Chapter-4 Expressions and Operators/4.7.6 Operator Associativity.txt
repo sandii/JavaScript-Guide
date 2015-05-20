@@ -1,0 +1,30 @@
+4.7.6 Operator Associativity
+In Table 4-1, the column labeled A specifies the associativity of the operator. A value of L specifies left-to-right associativity, and a value of R specifies right-to-left associativity. The associativity of an operator specifies the order in which operations of the same precedence are performed. Left-to-right associativity means that operations are performed from left to right. 
+
+4.7.6 运算符结合律
+表4-1中，标注A的一栏为运算符的结合律。
+L表示从左至右结合，R表示从右到左结合。
+结合律规定了同优先级的运算符的执行顺序。
+
+
+For example, the subtraction operator has left-to-right associativity, so:
+w = x - y - z;
+is the same as:
+w = ((x - y) - z);
+On the other hand, the following expressions:
+x = ~-y;
+w = x = y = z;
+q = a?b:c?d:e?f:g;
+are equivalent to:
+x = ~(-y); 
+w = (x = (y = z));
+q = a?b:(c?d:(e?f:g));
+because  the unary, assignment, and ternary conditional operators have right-to-left associativity.
+
+结合律规定了在运算符优先级相同的情况下先算哪个。
+一般来说所有一元、二元的赋值=和三元的?:都是从右到左，
+二元的除了赋值=其他都是从左到右：
+w = x - y - z;		=>	w = ((x - y) - z);
+x = ~-y;			=>	x = ~(-y);
+w = x = y = z;		=>	w = (x = (y = z));
+q = a?b:c?d:e?f:g;	=>	q = a?b:(c?d:(e?f:g));
